@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,13 +24,13 @@ public class TweetController {
 		return new ResponseEntity<>(tweetService.getMetadata(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/data", method = RequestMethod.POST)
-	public ResponseEntity<Object> getTweet(@RequestBody(required = false) String filter){
-		if(filter == null) {
-			return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
-		}
-		else {
-			//inserire filtro
-		}
+	@RequestMapping(value ="/data", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetNoFilter(){
+		return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
 	}
+	
+	//@RequestMapping(value ="/data/geo/{geo}", method = RequestMethod.GET)
+	//public ResponseEntity<Object> getTweetWithFilter(@RequestBody String filter){
+		//inserire filtro
+	//}
 }
