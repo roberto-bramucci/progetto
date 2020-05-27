@@ -43,7 +43,7 @@ public class Tweet {
 	public double getDistance(Tweet t) {
 		   double rifx = 13.516584634780884;
 	       double rify = 43.616962794315526;
-	       // Point2D.Double rifAnc = new Point2D.Double(rifx, rify);
+	       //Point2D.Double rifAnc = new Point2D.Double(rifx, rify);
 	       double R = 6372.795477598;
            double lat = t.getGeo().y;
            double lon = t.getGeo().x;

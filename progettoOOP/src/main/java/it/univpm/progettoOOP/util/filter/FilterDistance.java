@@ -3,23 +3,23 @@ package it.univpm.progettoOOP.util.filter;
 
 
 public class FilterDistance {
-	protected int distance;
+	protected double distance;
 	
-	public FilterDistance(Integer distance) {
+	public FilterDistance(Double distance) {
 		this.distance = distance;
 	}
 
 	/**
 	 * @return the distance
 	 */
-	public Integer getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
 	/**
 	 * @param point the point to set
 	 */
-	public void setDistance(Integer distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 	

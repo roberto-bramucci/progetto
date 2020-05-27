@@ -6,7 +6,7 @@ import it.univpm.progettoOOP.model.Tweet;
 
 public class FilterDistanceGreater extends FilterDistance implements Filter{
 
-	public FilterDistanceGreater(Integer distance) {
+	public FilterDistanceGreater(Double distance) {
 		super(distance);
 		
 	}
@@ -15,7 +15,7 @@ public class FilterDistanceGreater extends FilterDistance implements Filter{
 
 	@Override
 	public boolean filter(Tweet tweet) {
-		if(tweet.getDistance(tweet)>distance)
+		if((tweet.getDistance(tweet)>distance))
 			return true;
 		else
 			return false;
