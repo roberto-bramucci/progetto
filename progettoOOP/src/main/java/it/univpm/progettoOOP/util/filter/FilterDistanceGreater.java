@@ -15,7 +15,7 @@ public class FilterDistanceGreater extends FilterDistance implements Filter{
 
 	@Override
 	public boolean filter(Tweet tweet) {
-		if((tweet.getDistance(tweet)>distance))
+		if(tweet.getDistance()>distance)
 			return true;
 		else
 			return false;
