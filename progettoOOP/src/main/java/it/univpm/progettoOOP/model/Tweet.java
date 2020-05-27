@@ -39,4 +39,14 @@ public class Tweet {
 	public void setGeo(Point2D.Double geo) {
 		this.geo = geo;
 	}
+	
+	public double getDistance() {
+		   double rifx = 13.516584634780884;
+	       double rify = 43.616962794315526;
+	       double R = 6372.795477598;
+           double lat = getGeo().y;
+           double lon = getGeo().x;
+           double dist =  R * Math.acos(Math.sin(lat) * Math.sin(rify) + Math.cos(lat) * Math.cos(rify) * Math.cos(lon-rifx));
+           return dist;
+	}
 }
