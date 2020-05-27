@@ -2,10 +2,14 @@ package it.univpm.progettoOOP.util.stats;
 
 public class Stats {
 	private String field;
-	private int avgDist;
-	private int maxDist;
-	private int minDist;
-	private int sumDist;
+	private double avgDist;
+	private double maxDist;
+	private double minDist;
+	private double sumDist;
+	
+	public Stats() {
+		this.field = "geo";
+	}
 	
 	public String getField() {
 		return field;
@@ -13,28 +17,28 @@ public class Stats {
 	public void setField(String field) {
 		this.field = field;
 	}
-	public int getAvgDist() {
+	public double getAvgDist() {
 		return avgDist;
 	}
-	public void setAvgDist(int avgDist) {
+	public void setAvgDist(double avgDist) {
 		this.avgDist = avgDist;
 	}
-	public int getMaxDist() {
+	public double getMaxDist() {
 		return maxDist;
 	}
-	public void setMaxDist(int maxDist) {
+	public void setMaxDist(double maxDist) {
 		this.maxDist = maxDist;
 	}
-	public int getMinDist() {
+	public double getMinDist() {
 		return minDist;
 	}
-	public void setMinDist(int minDist) {
+	public void setMinDist(double minDist) {
 		this.minDist = minDist;
 	}
-	public int getSumDist() {
+	public double getSumDist() {
 		return sumDist;
 	}
-	public void setSumDist(int sumDist) {
+	public void setSumDist(double sumDist) {
 		this.sumDist = sumDist;
 	}
 }
