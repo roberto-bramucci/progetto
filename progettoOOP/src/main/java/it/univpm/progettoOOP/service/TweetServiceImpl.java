@@ -90,15 +90,15 @@ public class TweetServiceImpl implements TweetService {
 		return tweets.values();
 	}
 	
-	public String getMetadata() {
+	public JsonSchema getMetadata() {
 		try {
 			ObjectMapper obj = new ObjectMapper();
 			JsonSchemaGenerator gen = new JsonSchemaGenerator(obj);
 			JsonSchema schema = gen.generateSchema(Tweet.class);
-			return obj.writeValueAsString(schema);	
+			return schema;
 		}
 		catch(Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 		return null;
 	}
