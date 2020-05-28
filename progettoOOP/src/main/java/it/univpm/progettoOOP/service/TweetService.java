@@ -14,5 +14,4 @@ public interface TweetService {
 	
 	public Collection<Tweet> getData();
 	public JsonSchema getMetadata();
-	public Collection<Tweet> getDataFilter(Filter fil);
 }

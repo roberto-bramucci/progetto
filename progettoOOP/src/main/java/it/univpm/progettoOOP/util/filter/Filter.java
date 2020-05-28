@@ -1,9 +1,7 @@
 package it.univpm.progettoOOP.util.filter;
 
-import it.univpm.progettoOOP.model.Tweet;
+import java.util.Collection;
 
-public interface Filter {
-	
-	
-	public boolean filter (Tweet tweet);
+public interface Filter<E,T> {
+	abstract Collection<E> chooseFilter(String operator, Double... value);
 }
