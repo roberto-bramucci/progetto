@@ -41,11 +41,11 @@ public class Tweet {
 	}
 	
 	public double getDistance() {
-		   double rifx = 13.516584634780884;
-	       double rify = 43.616962794315526;
+		   double rifx = 13.516584634780884 * Math.PI/180;
+		   double rify = 43.616962794315526 * Math.PI/180;
 	       double R = 6372.795477598;
-           double lat = getGeo().y;
-           double lon = getGeo().x;
+           double lat = getGeo().y * Math.PI/180;
+           double lon = getGeo().x * Math.PI/180;
            double dist =  R * Math.acos(Math.sin(lat) * Math.sin(rify) + Math.cos(lat) * Math.cos(rify) * Math.cos(lon-rifx));
            return dist;
 	}

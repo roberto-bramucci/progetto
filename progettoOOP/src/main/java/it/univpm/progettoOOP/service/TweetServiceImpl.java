@@ -1,6 +1,7 @@
 package it.univpm.progettoOOP.service;
 
 import it.univpm.progettoOOP.model.Tweet;
+import it.univpm.progettoOOP.util.filter.Filter;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -19,6 +20,7 @@ import java.awt.geom.Point2D.Double;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.net.URL;
@@ -39,7 +41,7 @@ public class TweetServiceImpl implements TweetService {
 			JsonParser parser = factory.createParser(input);
 			for(int i = 0; i < 32; i++){
 				Tweet tweet = deserialize(parser);
-				tweets.put((int)count.incrementAndGet(), tweet);
+				tweets.put(i, tweet);
 			}
 		}
 		catch(Exception e) {
@@ -101,5 +103,15 @@ public class TweetServiceImpl implements TweetService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Collection<Tweet> getDataFilter(Filter fil){
+		Collection<Tweet> sample = new ArrayList<Tweet>();
+		for(int i = 0; i < tweets.size(); i++) {
+			if(fil.filter(tweets.getOrDefault(i, null))) {
+				sample.add(tweets.getOrDefault(i, null));
+			}
+		}
+		return sample;
 	}
 }
