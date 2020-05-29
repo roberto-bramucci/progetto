@@ -2,10 +2,10 @@ package it.univpm.progettoOOP.util.filter;
 
 import it.univpm.progettoOOP.model.Tweet;
 
-public class FilterDistanceBetween extends Filter2Distances implements Filter{
+public class Filter2DistancesBetween extends Filter2Distances implements Filter{
 
 	
-	public FilterDistanceBetween(Double distance1, Double distance2) {
+	public Filter2DistancesBetween(Double distance1, Double distance2) {
 		super(distance1, distance2);
 		
 	}
