@@ -80,21 +80,6 @@ public class TweetController {
         default:
         	return null;
 		}
-		/*if(name.equals("$gt")){
-			double rif = json.getDouble(name);
-			return twFIl.chooseFilter(name, rif);
-		}
-		else if(name.equals("&gte")) {
-			double rif = json.getDouble(name);
-			return twFIl.chooseFilter(name, rif);
-		}
-		else if(name.equals("&lt")) {
-			double rif = json.getDouble(name);
-			return twFIl.chooseFilter(name, rif);
-		}
-		*/
-		
-		//return null;
 		
 	}
 }

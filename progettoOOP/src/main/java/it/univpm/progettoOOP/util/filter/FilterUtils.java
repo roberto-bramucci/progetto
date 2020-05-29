@@ -19,7 +19,7 @@ public class FilterUtils<T> {
 				return valuec < thC;
 			else if (operator.equals("$lte"))
 				return valuec <= thC;
-		
+			
 		}
 		else if (th.length == 2 && th[0] instanceof Double && th[1] instanceof Double && value instanceof Tweet) {
 			Double thC1 = (Double)th[0];
