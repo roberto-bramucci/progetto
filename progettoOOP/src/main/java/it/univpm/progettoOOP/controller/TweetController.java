@@ -1,5 +1,6 @@
 package it.univpm.progettoOOP.controller;
 
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,11 +61,40 @@ public class TweetController {
 	
 	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json) {
 		String name = json.keys().next();
-		if(name.equals("$gt")){
+		switch (name) {
+		case "$lt":
+        case "$gt":
+        case "$gte":
+        case "$lte":
+        case "$eq":
+    	{
+    		double rif = json.getDouble(name);
+			return twFIl.chooseFilter(name, rif);
+    	}
+        case "$bt":
+        {
+        	 double min = json.getJSONArray(name).getDouble(0);
+             double max = json.getJSONArray(name).getFloat(1);
+             return twFIl.chooseFilter(name, min, max);
+        }
+        default:
+        	return null;
+		}
+		/*if(name.equals("$gt")){
 			double rif = json.getDouble(name);
 			return twFIl.chooseFilter(name, rif);
 		}
-		return null;
+		else if(name.equals("&gte")) {
+			double rif = json.getDouble(name);
+			return twFIl.chooseFilter(name, rif);
+		}
+		else if(name.equals("&lt")) {
+			double rif = json.getDouble(name);
+			return twFIl.chooseFilter(name, rif);
+		}
+		*/
+		
+		//return null;
 		
 	}
 }

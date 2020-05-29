@@ -13,13 +13,20 @@ public class FilterUtils<T> {
 			Double valuec = value.getDistance();
 			if (operator.equals("$gt"))
 				return valuec > thC;
-		/*	else if (operator.equals(">"))
-				return valuec > thC;
-			else if (operator.equals("<"))
+			else if (operator.equals("$gte"))
+				return valuec >= thC;
+			else if (operator.equals("$lt"))
 				return valuec < thC;
-		}else if(th instanceof String && value instanceof String)
-			return value.equals(th);
-		return false;*/		
+			else if (operator.equals("$lte"))
+				return valuec <= thC;
+		
+		}
+		else if (th.length == 2 && th[0] instanceof Double && th[1] instanceof Double && value instanceof Tweet) {
+			Double thC1 = (Double)th[0];
+			Double thC2 = (Double)th[1];
+			Double valuec = value.getDistance();
+			if (operator.equals("$bt"))
+				return valuec >= thC1 && valuec <= thC2;
 		}
 	return false;
 	}
