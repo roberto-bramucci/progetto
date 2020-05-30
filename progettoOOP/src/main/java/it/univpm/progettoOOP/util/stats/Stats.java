@@ -6,6 +6,8 @@ public class Stats {
 	private double maxDist;
 	private double minDist;
 	private double sumDist;
+	private double varDist;
+	private double devStdDist;
 	
 	public Stats() {
 		this.field = "geo";
@@ -40,5 +42,17 @@ public class Stats {
 	}
 	public void setSumDist(double sumDist) {
 		this.sumDist = sumDist;
+	}
+	public double getVarDist() {
+		return varDist;
+	}
+	public void setVarDist(double varDist) {
+		this.varDist = varDist;
+	}
+	public double getDevStdDit() {
+		return devStdDist;
+	}
+	public void setDevStdDist(double devStdDist) {
+		this.devStdDist = devStdDist;
 	}
 }

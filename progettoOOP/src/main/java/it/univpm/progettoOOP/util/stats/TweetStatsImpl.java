@@ -42,6 +42,18 @@ public class TweetStatsImpl extends Stats implements TweetStats{
 			}
 			statistics.setSumDist(sum);
 			statistics.setAvgDist(sum/distances.size());
+			
+			double t = 0;
+			double a = 0;
+			a = sum/distances.size();
+			for (int i = 0; i < distances.size(); i++) {
+				t += (distances.get(i)-a)*(distances.get(i)-a);
+			}
+			double var = t/(distances.size());
+			statistics.setVarDist(var);
+			statistics.setDevStdDist(Math.sqrt(var));
+			
+			
 		}
 		catch(NullPointerException e) {
 			e.printStackTrace();

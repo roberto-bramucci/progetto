@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +45,11 @@ public class TweetController {
 	@RequestMapping(value ="/data", method = RequestMethod.GET)
 	public ResponseEntity<Object> getTweetNoFilter(){
 		return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
+	}
+	
+	@RequestMapping (value = "/tweet/id/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetFromId(@PathVariable String id){
+		return new ResponseEntity<>(tweetService.getTweetFromId(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value ="/data/geo", method = RequestMethod.POST)
@@ -81,5 +88,5 @@ public class TweetController {
         	return null;
 		}
 		
-	}
+	} 
 }

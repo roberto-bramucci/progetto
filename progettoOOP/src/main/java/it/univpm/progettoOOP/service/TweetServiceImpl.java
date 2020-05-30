@@ -89,6 +89,15 @@ public class TweetServiceImpl implements TweetService {
 		return tweets;
 	}
 	
+	public Tweet getTweetFromId(String id){
+		for (Tweet t : tweets) {
+			if(t.getId().equalsIgnoreCase(id)) {
+				return t;
+			}
+		}
+		return null;		
+	}
+	
 	public JsonSchema getMetadata() {
 		try {
 			ObjectMapper obj = new ObjectMapper();
