@@ -27,15 +27,14 @@ import it.univpm.progettoOOP.service.*;
 import it.univpm.progettoOOP.util.filter.*;
 import it.univpm.progettoOOP.util.stats.*;
 import it.univpm.progettoOOP.model.*;
+import it.univpm.progettoOOP.util.stats.*;
 
 @RestController
 public class TweetController {
 	
 	@Autowired
 	private TweetService tweetService;
-	
-	private TweetStats tweetStats = new TweetStatsImpl();
-	
+		
 	
 	@RequestMapping(value ="/metadata", method = RequestMethod.GET)
 	public ResponseEntity<Object> getMeta() {
@@ -61,7 +60,8 @@ public class TweetController {
 	}
 	
 	@RequestMapping(value ="/data/stats", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetStats(){;
+	public ResponseEntity<Object> getTweetStats(){
+		TweetStats tweetStats = new TweetStatsImpl();
 		tweetStats.setStats(tweetService.getData());
 		return new ResponseEntity<>(tweetStats.getStatsAncona(), HttpStatus.OK);
 	}

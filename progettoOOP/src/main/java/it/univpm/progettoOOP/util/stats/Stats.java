@@ -1,7 +1,7 @@
 package it.univpm.progettoOOP.util.stats;
 
 public class Stats {
-	private String field;
+	private final String field = "geo";
 	private double avgDist;
 	private double maxDist;
 	private double minDist;
@@ -10,14 +10,16 @@ public class Stats {
 	private double devStdDist;
 	
 	public Stats() {
-		this.field = "geo";
+		this.avgDist = 0;
+		this.maxDist = 0;
+		this.minDist = 0;
+		this.sumDist = 0;
+		this.varDist = 0;
+		this.devStdDist = 0;
 	}
 	
 	public String getField() {
 		return field;
-	}
-	public void setField(String field) {
-		this.field = field;
 	}
 	public double getAvgDist() {
 		return avgDist;
