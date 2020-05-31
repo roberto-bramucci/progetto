@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.json.JSONObject;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.http.HttpStatus;
@@ -59,11 +60,24 @@ public class TweetController {
 		return new ResponseEntity<>(parseFilter(tweetsFil, obj), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/data/stats", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetStats(){
-		TweetStats tweetStats = new TweetStatsImpl();
-		tweetStats.setStats(tweetService.getData());
-		return new ResponseEntity<>(tweetStats.getStatsAncona(), HttpStatus.OK);
+	
+	
+	@RequestMapping(value = "data/stats", method = RequestMethod.POST)
+	public ResponseEntity<Object> getStatsWithFilter(@RequestBody (required = false) String filter){
+		if (filter == null) {
+			TweetStats tweetStats = new TweetStatsImpl();
+			tweetStats.setStats(tweetService.getData());
+			return new ResponseEntity<>(tweetStats.getStatsAncona(), HttpStatus.OK);
+		}
+		else {
+			JSONObject obj = new JSONObject(filter);
+			FilterUtils<Tweet> utl = new FilterUtils<>();
+			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
+			ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj);
+			TweetStats tweetStats = new TweetStatsImpl();
+			tweetStats.setStats(filteredArray);
+			return new ResponseEntity<>(tweetStats.getStatsAncona(), HttpStatus.OK);
+		}
 	}
 	
 	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json) {
