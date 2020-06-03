@@ -27,6 +27,8 @@ import org.json.JSONObject;
 import it.univpm.progettoOOP.service.*;
 import it.univpm.progettoOOP.util.filter.*;
 import it.univpm.progettoOOP.util.stats.*;
+import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
+import it.univpm.progettoOOP.exceptions.IllegalIdException;
 import it.univpm.progettoOOP.model.*;
 import it.univpm.progettoOOP.util.stats.*;
 
@@ -48,12 +50,12 @@ public class TweetController {
 	}
 	
 	@RequestMapping (value = "/tweet/id/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetFromId(@PathVariable String id){
+	public ResponseEntity<Object> getTweetFromId (@PathVariable String id) throws IllegalIdException{
 		return new ResponseEntity<>(tweetService.getTweetFromId(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value ="/data/geo", method = RequestMethod.POST)
-	public ResponseEntity<Object> getTweetWithFilter(@RequestBody String filter){
+	public ResponseEntity<Object> getTweetWithFilter(@RequestBody String filter) throws FilterNotFoundException{
 		JSONObject obj = new JSONObject(filter);
 		FilterUtils<Tweet> utl = new FilterUtils<>();
 		TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
@@ -63,7 +65,7 @@ public class TweetController {
 	
 	
 	@RequestMapping(value = "data/stats", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsWithFilter(@RequestBody (required = false) String filter){
+	public ResponseEntity<Object> getStatsWithFilter(@RequestBody (required = false) String filter) throws FilterNotFoundException{
 		if (filter == null) {
 			TweetStats tweetStats = new TweetStatsImpl();
 			tweetStats.setStats(tweetService.getData());
@@ -80,7 +82,7 @@ public class TweetController {
 		}
 	}
 	
-	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json) {
+	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json) throws FilterNotFoundException {
 		String name = json.keys().next();
 		switch (name) {
 		case "$lt":
@@ -99,7 +101,7 @@ public class TweetController {
              return twFIl.chooseFilter(name, min, max);
         }
         default:
-        	return null;
+        	throw new FilterNotFoundException("il filtro inserito non esiste");
 		}
 		
 	} 

@@ -1,5 +1,6 @@
 package it.univpm.progettoOOP.service;
 
+import it.univpm.progettoOOP.exceptions.IllegalIdException;
 import it.univpm.progettoOOP.model.Tweet;
 import it.univpm.progettoOOP.util.filter.Filter;
 
@@ -89,13 +90,13 @@ public class TweetServiceImpl implements TweetService {
 		return tweets;
 	}
 	
-	public Tweet getTweetFromId(String id){
+	public Tweet getTweetFromId(String id) throws IllegalIdException{
 		for (Tweet t : tweets) {
 			if(t.getId().equalsIgnoreCase(id)) {
 				return t;
 			}
 		}
-		return null;		
+		throw new IllegalIdException("this id doesn't exist");		
 	}
 	
 	public JsonSchema getMetadata() {
