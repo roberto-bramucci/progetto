@@ -38,7 +38,7 @@ public class TweetFilter implements Filter<Tweet, Object[]> {
 	}
 	
 	@Override
-	public ArrayList<Tweet> chooseFilter(String operator, Double... value) {
-		return (ArrayList<Tweet>) utils.select(this.getSample(), operator, value);
+	public ArrayList<Tweet> chooseFilter(String operator, String city, Double... value) {
+		return (ArrayList<Tweet>) utils.select(this.getSample(), operator, city,  value);
 	}
 }

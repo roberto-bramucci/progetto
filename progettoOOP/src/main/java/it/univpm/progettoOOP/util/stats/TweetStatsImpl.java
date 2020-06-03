@@ -3,6 +3,11 @@ package it.univpm.progettoOOP.util.stats;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import it.univpm.progettoOOP.model.*;
 
 public class TweetStatsImpl extends Stats implements TweetStats{
@@ -10,12 +15,11 @@ public class TweetStatsImpl extends Stats implements TweetStats{
 	private ArrayList<Double> distances = new ArrayList<Double>();
 	private Stats statistics = new Stats();
 	
-	public void setStats(Collection<Tweet> sample) {
+	public void setStats(Collection<Tweet> sample, String city) {
 		try {
 			for(Tweet t : sample) {
-				distances.add(t.getDistance());
+				distances.add(t.chooseCity(city));
 			}
-
 			double min = distances.get(0);
 			for(int i = 1; i < distances.size(); i++) {
 			if(distances.get(i) < min)
@@ -54,7 +58,8 @@ public class TweetStatsImpl extends Stats implements TweetStats{
 		}
 	}
 	
-	public Stats getStatsAncona() {
+	public Stats getStats() {
 		return statistics;
 	}
+	
 }
