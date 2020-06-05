@@ -2,7 +2,11 @@ package it.univpm.progettoOOP.model;
 
 import java.util.ArrayList;
 
-
+import it.univpm.progettoOOP.exceptions.CityNotFoundException;
+import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
+import it.univpm.progettoOOP.exceptions.GenericFilterException;
+import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
+import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.util.filter.Filter;
 import it.univpm.progettoOOP.util.filter.FilterUtils;
 
@@ -38,7 +42,7 @@ public class TweetFilter implements Filter<Tweet, Object[]> {
 	}
 	
 	@Override
-	public ArrayList<Tweet> chooseFilter(String operator, String city, Double... value) {
+	public ArrayList<Tweet> chooseFilter(String operator, String city, Double... value) throws FilterNotFoundException, CityNotFoundException, NegativeValueException, IllegalIntervalException, GenericFilterException {
 		return (ArrayList<Tweet>) utils.select(this.getSample(), operator, city,  value);
 	}
 }

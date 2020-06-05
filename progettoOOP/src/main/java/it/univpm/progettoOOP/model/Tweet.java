@@ -3,6 +3,8 @@ package it.univpm.progettoOOP.model;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
+import it.univpm.progettoOOP.exceptions.CityNotFoundException;
+
 public class Tweet {
 	private String id;
 	private String text;
@@ -40,7 +42,7 @@ public class Tweet {
 		this.geo = geo;
 	}
 	
-	public double chooseCity(String city) {
+	public double chooseCity(String city) throws CityNotFoundException{
 		if(city.equals("AN"))
 			return getDistanceAncona();
 		else if(city.equals("RM"))
@@ -49,8 +51,8 @@ public class Tweet {
 			return getDistanceMilano();
 		else if(city.equals("NP"))
 			return getDistanceNapoli();
-		
-		return 0;
+		else
+			throw new CityNotFoundException("Questa città non è disponibile");
 	}
 	
 	public double getDistanceAncona() {

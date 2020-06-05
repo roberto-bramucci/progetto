@@ -3,6 +3,7 @@ package it.univpm.progettoOOP.util.stats;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.model.Tweet;
 
 public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
@@ -10,11 +11,13 @@ public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
 	private ArrayList<Integer> length = new ArrayList<Integer>();
 	private StatsText statistics = new StatsText();
 	
-	public void setStatsText(Collection<Tweet> sample) {
+	public void setStatsText(Collection<Tweet> sample) throws EmptyCollectionException {
 		try {
 			for(Tweet t : sample) {
 				length.add(t.getText().length());
 			}
+			
+			statistics.setNumTweetAnalyzed(length.size());
 			
 			if(length.size() != 0) {
 				double min = length.get(0);
@@ -39,8 +42,9 @@ public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
 				statistics.setSumLength(sum);
 				statistics.setAvgLength(sum/length.size());
 			}
-			
-			statistics.setNumTweetAnalyzed(length.size());
+			else
+				throw new EmptyCollectionException("Nessun dato analizzabile con questo filtro");
+
 			}
 		catch(NullPointerException e) {
 			e.printStackTrace();

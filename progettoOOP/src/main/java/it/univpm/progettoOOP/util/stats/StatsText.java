@@ -1,12 +1,17 @@
 package it.univpm.progettoOOP.util.stats;
 
 public class StatsText {
+	private final String field = "text";
 	private double avgLength;
 	private double maxLength;
 	private double minLength;
 	private double sumLength;
 	private int numTweetAnalyzed;
 	
+	public String getField() {
+		return field;
+	}
+
 	public double getAvgLength() {
 		return avgLength;
 	}

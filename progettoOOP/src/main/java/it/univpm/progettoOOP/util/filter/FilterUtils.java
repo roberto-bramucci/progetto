@@ -3,14 +3,21 @@ package it.univpm.progettoOOP.util.filter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+import it.univpm.progettoOOP.exceptions.CityNotFoundException;
+import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
+import it.univpm.progettoOOP.exceptions.GenericFilterException;
+import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
+import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.model.Tweet;
 
 public class FilterUtils<T> {
 	
-	public static boolean check(Tweet value, String operator, String city, Double... th){
+	public static boolean check(Tweet value, String operator, String city, Double... th)
+			throws CityNotFoundException, FilterNotFoundException, IllegalIntervalException, GenericFilterException{
 		if (th.length == 1 && th[0] instanceof Double && value instanceof Tweet) {	
 			Double thC = (Double)th[0];
+			if(thC < 0)
+				throw new NegativeValueException("Il valore inserito è negativo");
 			Double valuec = value.chooseCity(city);
 			if (operator.equals("$gt"))
 				return valuec > thC;
@@ -20,6 +27,8 @@ public class FilterUtils<T> {
 				return valuec < thC;
 			else if (operator.equals("$lte"))
 				return valuec <= thC;
+			else
+				throw new FilterNotFoundException("Il filtro inserito non esiste");
 			
 		}
 		else if (th.length == 2 && th[0] instanceof Double && th[1] instanceof Double && value instanceof Tweet) {
@@ -30,13 +39,14 @@ public class FilterUtils<T> {
 				if (thC1<=thC2)
 					return valuec >= thC1 && valuec <= thC2;
 				else
-					throw new IllegalArgumentException("thC1 must be lower than thC2");
+					throw new IllegalIntervalException("Il primo valore deve essere maggiore del secondo");
 			}
 		}
-	return false;
+		throw new GenericFilterException("Errore nella scelta del filtro");
 	}
 	
-	public Collection<Tweet> select(Collection<Tweet> src, String operator, String city, Double... value) {
+	public Collection<Tweet> select(Collection<Tweet> src, String operator, String city, Double... value) 
+			throws CityNotFoundException, FilterNotFoundException, GenericFilterException{
 		Collection<Tweet> out = new ArrayList<>();
 		for(Tweet item : src) {
 			try {

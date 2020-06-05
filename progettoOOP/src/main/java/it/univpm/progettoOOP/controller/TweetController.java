@@ -1,17 +1,13 @@
 package it.univpm.progettoOOP.controller;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import org.json.JSONObject;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,18 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-
 import it.univpm.progettoOOP.service.*;
 import it.univpm.progettoOOP.util.filter.*;
 import it.univpm.progettoOOP.util.stats.*;
+import it.univpm.progettoOOP.exceptions.CityNotFoundException;
+import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
+import it.univpm.progettoOOP.exceptions.GenericFilterException;
 import it.univpm.progettoOOP.exceptions.IllegalIdException;
+import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
+import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.model.*;
-import it.univpm.progettoOOP.util.stats.*;
 
 @RestController
 public class TweetController {
@@ -45,7 +40,10 @@ public class TweetController {
 	}
 	
 	@RequestMapping(value ="/data", method = RequestMethod.POST)
-	public ResponseEntity<Object> getDataWithFilter(@RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
+	public ResponseEntity<Object> getDataWithFilter(@RequestParam (required = false) String city, 
+			@RequestBody (required = false) String filter) 
+					throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
+					IllegalIntervalException, GenericFilterException{
 		if (filter == null) {
 			return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
 		}
@@ -70,14 +68,18 @@ public class TweetController {
 	}
 	
 	@RequestMapping(value = "data/stats/text", method = RequestMethod.GET)
-	public ResponseEntity<Object> getStatsTextNoFilter(){
+	public ResponseEntity<Object> getStatsTextNoFilter() throws EmptyCollectionException{
 		TweetStatsText tweetStatsText = new TweetStatsTextImpl();
 		tweetStatsText.setStatsText(tweetService.getData());
 		return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK); 
 	}
 	
 	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, @RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
+	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, 
+			@RequestParam (required = false) String city, 
+			@RequestBody (required = false) String filter) 
+					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
+					IllegalIntervalException, GenericFilterException{
 		if (filter == null) {
 			FilterIdText fil =  new FilterIdTextImpl();
 			ArrayList<Tweet> filteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(tweetService.getData(), word);
@@ -99,7 +101,10 @@ public class TweetController {
 	}
 	
 	@RequestMapping(value = "data/stats/geo", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsGeoWithFilter(@RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
+	public ResponseEntity<Object> getStatsGeoWithFilter(@RequestParam (required = false) String city, 
+			@RequestBody (required = false) String filter) 
+					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
+					IllegalIntervalException, GenericFilterException{
 		if (filter == null) {
 			TweetStatsGeo tweetStatsGeo = new TweetStatsGeoImpl();
 			tweetStatsGeo.setStatsGeo(tweetService.getData(), city);
@@ -116,7 +121,9 @@ public class TweetController {
 		}
 	}
 		
-	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json, String city) throws FilterNotFoundException {
+	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json, String city)
+			throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
+			IllegalIntervalException, GenericFilterException {
 		String name = json.keys().next();
 		switch (name) {
 		case "$lt":
