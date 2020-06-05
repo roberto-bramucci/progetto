@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
@@ -90,15 +91,6 @@ public class TweetServiceImpl implements TweetService {
 		return tweets;
 	}
 	
-	public Tweet getTweetFromId(String id) throws IllegalIdException{
-		for (Tweet t : tweets) {
-			if(t.getId().equalsIgnoreCase(id)) {
-				return t;
-			}
-		}
-		throw new IllegalIdException("this id doesn't exist");		
-	}
-	
 	public JsonSchema getMetadata() {
 		try {
 			ObjectMapper obj = new ObjectMapper();
@@ -106,7 +98,7 @@ public class TweetServiceImpl implements TweetService {
 			JsonSchema schema = gen.generateSchema(Tweet.class);
 			return schema;
 		}
-		catch(Exception e) {
+		catch(JsonMappingException e) {
 			e.printStackTrace();
 		}
 		return null;

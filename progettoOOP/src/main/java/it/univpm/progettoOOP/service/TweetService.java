@@ -15,5 +15,4 @@ public interface TweetService {
 	
 	public Collection<Tweet> getData();
 	public JsonSchema getMetadata();
-	public Tweet getTweetFromId(String id) throws IllegalIdException;
 }

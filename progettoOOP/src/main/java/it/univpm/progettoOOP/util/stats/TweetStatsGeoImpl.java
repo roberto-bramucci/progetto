@@ -3,19 +3,14 @@ package it.univpm.progettoOOP.util.stats;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import it.univpm.progettoOOP.model.*;
 
-public class TweetStatsImpl extends Stats implements TweetStats{
+public class TweetStatsGeoImpl extends StatsGeo implements TweetStatsGeo{
 	
 	private ArrayList<Double> distances = new ArrayList<Double>();
-	private Stats statistics = new Stats();
+	private StatsGeo statistics = new StatsGeo();
 	
-	public void setStats(Collection<Tweet> sample, String city) {
+	public void setStatsGeo(Collection<Tweet> sample, String city) {
 		try {
 			for(Tweet t : sample) {
 				distances.add(t.chooseCity(city));
@@ -51,6 +46,8 @@ public class TweetStatsImpl extends Stats implements TweetStats{
 			double var = t/(distances.size());
 			statistics.setVarDist(var);
 			statistics.setDevStdDist(Math.sqrt(var));
+			
+			statistics.setNumTweetAnalyzed(distances.size());
 		
 		}
 		catch(NullPointerException e) {
@@ -58,7 +55,7 @@ public class TweetStatsImpl extends Stats implements TweetStats{
 		}
 	}
 	
-	public Stats getStats() {
+	public StatsGeo getStatsGeo() {
 		return statistics;
 	}
 	

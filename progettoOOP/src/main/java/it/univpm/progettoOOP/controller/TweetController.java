@@ -45,7 +45,7 @@ public class TweetController {
 	}
 	
 	@RequestMapping(value ="/data", method = RequestMethod.POST)
-	public ResponseEntity<Object> getDataWithFilter(@RequestBody (required = false) String filter) throws FilterNotFoundException{
+	public ResponseEntity<Object> getDataWithFilter(@RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
 		if (filter == null) {
 			return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
 		}
@@ -53,41 +53,69 @@ public class TweetController {
 			JSONObject obj = new JSONObject(filter);
 			FilterUtils<Tweet> utl = new FilterUtils<>();
 			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-			return new ResponseEntity<>(parseFilter(tweetsFil, obj, null), HttpStatus.OK);
+			return new ResponseEntity<>(parseFilter(tweetsFil, obj, city), HttpStatus.OK);
 		}
 	}
 	
-	@RequestMapping (value = "/data/id/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetFromId (@PathVariable String id) throws IllegalIdException{
-		return new ResponseEntity<>(tweetService.getTweetFromId(id), HttpStatus.OK);
+	@RequestMapping (value = "/data/id", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetId (@RequestParam String id) throws IllegalIdException{
+		FilterIdText fil = new FilterIdTextImpl();
+		return new ResponseEntity<>(fil.getTweetFromId(tweetService.getData(), id), HttpStatus.OK);
 	}
 	
-	/*@RequestMapping(value ="/data/geo", method = RequestMethod.POST)
-	public ResponseEntity<Object> getTweetWithFilter(@RequestBody String filter) throws FilterNotFoundException{
-		JSONObject obj = new JSONObject(filter);
-		FilterUtils<Tweet> utl = new FilterUtils<>();
-		TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-		return new ResponseEntity<>(parseFilter(tweetsFil, obj), HttpStatus.OK);
-	}*/
+	@RequestMapping (value = "/data/text", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetText(@RequestParam String word){
+		FilterIdText fil = new FilterIdTextImpl();
+		return new ResponseEntity<>(fil.getTweetsFromText(tweetService.getData(), word), HttpStatus.OK);
+	}
 	
-	@RequestMapping(value = "data/stats/{city}", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsWithFilter(@PathVariable("city") String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
+	@RequestMapping(value = "data/stats/text", method = RequestMethod.GET)
+	public ResponseEntity<Object> getStatsTextNoFilter(){
+		TweetStatsText tweetStatsText = new TweetStatsTextImpl();
+		tweetStatsText.setStatsText(tweetService.getData());
+		return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK); 
+	}
+	
+	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.POST)
+	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, @RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
 		if (filter == null) {
-			TweetStats tweetStats = new TweetStatsImpl();
-			tweetStats.setStats(tweetService.getData(), city);
-			return new ResponseEntity<>(tweetStats.getStats(), HttpStatus.OK);
+			FilterIdText fil =  new FilterIdTextImpl();
+			ArrayList<Tweet> filteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(tweetService.getData(), word);
+			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
+			tweetStatsText.setStatsText(filteredArray);
+			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
 		}
 		else {
 			JSONObject obj = new JSONObject(filter);
 			FilterUtils<Tweet> utl = new FilterUtils<>();
 			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
 			ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
-			TweetStats tweetStats = new TweetStatsImpl();
-			tweetStats.setStats(filteredArray, city);
-			return new ResponseEntity<>(tweetStats.getStats(), HttpStatus.OK);
+			FilterIdText fil = new FilterIdTextImpl();
+			ArrayList<Tweet> newFilteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(filteredArray, word);
+			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
+			tweetStatsText.setStatsText(newFilteredArray);
+			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
 		}
 	}
 	
+	@RequestMapping(value = "data/stats/geo", method = RequestMethod.POST)
+	public ResponseEntity<Object> getStatsGeoWithFilter(@RequestParam (required = false) String city, @RequestBody (required = false) String filter) throws FilterNotFoundException{
+		if (filter == null) {
+			TweetStatsGeo tweetStatsGeo = new TweetStatsGeoImpl();
+			tweetStatsGeo.setStatsGeo(tweetService.getData(), city);
+			return new ResponseEntity<>(tweetStatsGeo.getStatsGeo(), HttpStatus.OK);
+		}
+		else {
+			JSONObject obj = new JSONObject(filter);
+			FilterUtils<Tweet> utl = new FilterUtils<>();
+			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
+			ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
+			TweetStatsGeo tweetStatsGeo = new TweetStatsGeoImpl();
+			tweetStatsGeo.setStatsGeo(filteredArray, city);
+			return new ResponseEntity<>(tweetStatsGeo.getStatsGeo(), HttpStatus.OK);
+		}
+	}
+		
 	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json, String city) throws FilterNotFoundException {
 		String name = json.keys().next();
 		switch (name) {
@@ -107,8 +135,7 @@ public class TweetController {
              return twFIl.chooseFilter(name, city, min, max);
         }
         default:
-        	throw new FilterNotFoundException("il filtro inserito non esiste");
-		}
-		
+        	throw new FilterNotFoundException("Il filtro inserito non esiste. Inserire un nuovo filtro valido");
+		}	
 	} 
 }

@@ -1,6 +1,6 @@
 package it.univpm.progettoOOP.util.stats;
 
-public class Stats {
+public class StatsGeo {
 	private final String field = "geo";
 	private double avgDist;
 	private double maxDist;
@@ -8,8 +8,9 @@ public class Stats {
 	private double sumDist;
 	private double varDist;
 	private double devStdDist;
+	private int numTweetAnalyzed;
 	
-	public Stats() {
+	public StatsGeo() {
 		this.avgDist = 0;
 		this.maxDist = 0;
 		this.minDist = 0;
@@ -62,11 +63,19 @@ public class Stats {
 		this.varDist = varDist;
 	}
 	
-	public double getDevStdDit() {
+	public double getDevStdDist() {
 		return devStdDist;
 	}
 	
 	public void setDevStdDist(double devStdDist) {
 		this.devStdDist = devStdDist;
+	}
+	
+	public int getNumTweetAnalyzed() {
+		return numTweetAnalyzed;
+	}
+
+	public void setNumTweetAnalyzed(int numTweetAnalyzed) {
+		this.numTweetAnalyzed = numTweetAnalyzed;
 	}
 }
