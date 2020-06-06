@@ -46,18 +46,13 @@ public class TweetController {
 	
 	@RequestMapping(value ="/data/{city}", method = RequestMethod.POST)
 	public ResponseEntity<Object> getDataWithFilter(@PathVariable ("city") String city, 
-			@RequestBody (required = false) String filter) 
+			@RequestBody String filter) 
 					throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
 					IllegalIntervalException, GenericFilterException{
-		if (filter == null) {
-			return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
-		}
-		else {
 			JSONObject obj = new JSONObject(filter);
 			FilterUtils<Tweet> utl = new FilterUtils<>();
 			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
 			return new ResponseEntity<>(parseFilter(tweetsFil, obj, city), HttpStatus.OK);
-		}
 	}
 	
 	@RequestMapping (value = "/data/id/{id}", method = RequestMethod.GET)
@@ -79,32 +74,6 @@ public class TweetController {
 		return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK); 
 	}
 	
-	@RequestMapping(value = "data/stats/text/{word}/{city}", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, 
-			@PathVariable ("city") String city, 
-			@RequestBody (required = false) String filter) 
-					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
-					IllegalIntervalException, GenericFilterException{
-		if (filter == null) {
-			FilterIdText fil =  new FilterIdTextImpl();
-			ArrayList<Tweet> filteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(tweetService.getData(), word);
-			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
-			tweetStatsText.setStatsText(filteredArray);
-			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
-		}
-		else {
-			JSONObject obj = new JSONObject(filter);
-			FilterUtils<Tweet> utl = new FilterUtils<>();
-			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-			ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
-			FilterIdText fil = new FilterIdTextImpl();
-			ArrayList<Tweet> newFilteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(filteredArray, word);
-			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
-			tweetStatsText.setStatsText(newFilteredArray);
-			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
-		}
-	}
-	
 	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getStatsText(@PathVariable("word") String word) 
 					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
@@ -117,6 +86,22 @@ public class TweetController {
 		
 	}
 	
+	@RequestMapping(value = "data/stats/text/{word}/{city}", method = RequestMethod.POST)
+	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, 
+			@PathVariable ("city") String city, 
+			@RequestBody (required = false) String filter) 
+					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
+					IllegalIntervalException, GenericFilterException{
+			JSONObject obj = new JSONObject(filter);
+			FilterUtils<Tweet> utl = new FilterUtils<>();
+			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
+			ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
+			FilterIdText fil = new FilterIdTextImpl();
+			ArrayList<Tweet> newFilteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(filteredArray, word);
+			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
+			tweetStatsText.setStatsText(newFilteredArray);
+			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
+	}
 	
 	@RequestMapping(value = "data/stats/geo/{city}", method = RequestMethod.POST)
 	public ResponseEntity<Object> getStatsGeoWithFilter(@PathVariable ("city") String city, 
