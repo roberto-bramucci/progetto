@@ -39,8 +39,13 @@ public class TweetController {
 		return new ResponseEntity<>(tweetService.getMetadata(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/data", method = RequestMethod.POST)
-	public ResponseEntity<Object> getDataWithFilter(@RequestParam (required = false) String city, 
+	@RequestMapping(value ="/data", method = RequestMethod.GET)
+	public ResponseEntity<Object> getData() {
+		return new ResponseEntity<>(tweetService.getData(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/data/{city}", method = RequestMethod.POST)
+	public ResponseEntity<Object> getDataWithFilter(@PathVariable ("city") String city, 
 			@RequestBody (required = false) String filter) 
 					throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
 					IllegalIntervalException, GenericFilterException{
@@ -55,14 +60,14 @@ public class TweetController {
 		}
 	}
 	
-	@RequestMapping (value = "/data/id", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetId (@RequestParam String id) throws IllegalIdException{
+	@RequestMapping (value = "/data/id/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetId (@PathVariable ("id") String id) throws IllegalIdException{
 		FilterIdText fil = new FilterIdTextImpl();
 		return new ResponseEntity<>(fil.getTweetFromId(tweetService.getData(), id), HttpStatus.OK);
 	}
 	
-	@RequestMapping (value = "/data/text", method = RequestMethod.GET)
-	public ResponseEntity<Object> getTweetText(@RequestParam String word){
+	@RequestMapping (value = "/data/text/{word}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTweetText(@PathVariable ("word") String word){
 		FilterIdText fil = new FilterIdTextImpl();
 		return new ResponseEntity<>(fil.getTweetsFromText(tweetService.getData(), word), HttpStatus.OK);
 	}
@@ -74,9 +79,9 @@ public class TweetController {
 		return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK); 
 	}
 	
-	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.POST)
+	@RequestMapping(value = "data/stats/text/{word}/{city}", method = RequestMethod.POST)
 	public ResponseEntity<Object> getStatsTextWithFilter(@PathVariable("word") String word, 
-			@RequestParam (required = false) String city, 
+			@PathVariable ("city") String city, 
 			@RequestBody (required = false) String filter) 
 					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
 					IllegalIntervalException, GenericFilterException{
@@ -100,8 +105,21 @@ public class TweetController {
 		}
 	}
 	
-	@RequestMapping(value = "data/stats/geo", method = RequestMethod.POST)
-	public ResponseEntity<Object> getStatsGeoWithFilter(@RequestParam (required = false) String city, 
+	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getStatsText(@PathVariable("word") String word) 
+					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
+					IllegalIntervalException, GenericFilterException{
+			FilterIdText fil =  new FilterIdTextImpl();
+			ArrayList<Tweet> filteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(tweetService.getData(), word);
+			TweetStatsText tweetStatsText = new TweetStatsTextImpl();
+			tweetStatsText.setStatsText(filteredArray);
+			return new ResponseEntity<>(tweetStatsText.getStatsText(), HttpStatus.OK);
+		
+	}
+	
+	
+	@RequestMapping(value = "data/stats/geo/{city}", method = RequestMethod.POST)
+	public ResponseEntity<Object> getStatsGeoWithFilter(@PathVariable ("city") String city, 
 			@RequestBody (required = false) String filter) 
 					throws FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
 					IllegalIntervalException, GenericFilterException{
