@@ -186,17 +186,4 @@ class ProgettoOopApplicationTests {
         assertEquals(200, result.getStatusCodeValue());
     }
 	
-	
-	
-	@Test
-	public void CityNotFoundExceptionSucceeds() {
-		Exception exception = assertThrows(CityNotFoundException.class, () -> { t.chooseCity("TO");});
-		String expectedMessage = "Questa città non è disponibile";
-	    String actualMessage = exception.getMessage();
-	 
-	    assertTrue(actualMessage.contains(expectedMessage));
-	}
-
-	
-
 }

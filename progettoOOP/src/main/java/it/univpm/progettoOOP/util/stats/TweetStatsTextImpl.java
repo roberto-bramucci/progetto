@@ -11,6 +11,7 @@ public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
 	private ArrayList<Integer> length = new ArrayList<Integer>();
 	private StatsText statistics = new StatsText();
 	
+	@Override
 	public void setStatsText(Collection<Tweet> sample) throws EmptyCollectionException {
 		try {
 			for(Tweet t : sample) {
@@ -51,6 +52,7 @@ public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
 		}
 	}
 	
+	@Override
 	public StatsText getStatsText() {
 		return statistics;
 	}

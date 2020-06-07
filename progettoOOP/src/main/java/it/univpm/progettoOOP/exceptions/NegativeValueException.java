@@ -1,6 +1,6 @@
 package it.univpm.progettoOOP.exceptions;
 
-public class NegativeValueException extends IllegalArgumentException{
+public class NegativeValueException extends Exception{
 
 	public NegativeValueException() {
 		super();

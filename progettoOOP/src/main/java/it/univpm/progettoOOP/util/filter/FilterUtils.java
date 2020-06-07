@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
-import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
 import it.univpm.progettoOOP.exceptions.GenericFilterException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
@@ -13,7 +12,7 @@ import it.univpm.progettoOOP.model.Tweet;
 public class FilterUtils<T> {
 	
 	public static boolean check(Tweet value, String operator, String city, Double... th)
-			throws CityNotFoundException, FilterNotFoundException, IllegalIntervalException, GenericFilterException{
+			throws CityNotFoundException, IllegalIntervalException, NegativeValueException, GenericFilterException{
 		if (th.length == 1 && th[0] instanceof Double && value instanceof Tweet) {	
 			Double thC = (Double)th[0];
 			if(thC < 0)
@@ -26,10 +25,7 @@ public class FilterUtils<T> {
 			else if (operator.equals("$lt"))
 				return valuec < thC;
 			else if (operator.equals("$lte"))
-				return valuec <= thC;
-			else
-				throw new FilterNotFoundException("Il filtro inserito non esiste");
-			
+				return valuec <= thC;			
 		}
 		else if (th.length == 2 && th[0] instanceof Double && th[1] instanceof Double && value instanceof Tweet) {
 			Double thC1 = (Double)th[0];
@@ -46,7 +42,7 @@ public class FilterUtils<T> {
 	}
 	
 	public Collection<Tweet> select(Collection<Tweet> src, String operator, String city, Double... value) 
-			throws CityNotFoundException, FilterNotFoundException, GenericFilterException{
+			throws CityNotFoundException, IllegalIntervalException, NegativeValueException, GenericFilterException{
 		Collection<Tweet> out = new ArrayList<>();
 		for(Tweet item : src) {
 			try {
@@ -54,8 +50,12 @@ public class FilterUtils<T> {
 					out.add(item);
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
+				System.out.println("Errore nei parametri del metodo");
+				System.exit(1);
 			} catch (SecurityException e) {
 				e.printStackTrace();
+				System.out.println("Violazione di sicurezza");
+				System.exit(1);
 			}
 		}
 		return out;

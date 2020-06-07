@@ -8,6 +8,13 @@ public class StatsText {
 	private double sumLength;
 	private int numTweetAnalyzed;
 	
+	public StatsText() {
+		this.avgLength = 0;
+		this.maxLength = 0;
+		this.minLength = 0;
+		this.sumLength = 0;
+	}
+	
 	public String getField() {
 		return field;
 	}

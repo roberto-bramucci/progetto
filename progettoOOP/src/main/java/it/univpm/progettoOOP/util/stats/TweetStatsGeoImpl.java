@@ -12,6 +12,7 @@ public class TweetStatsGeoImpl extends StatsGeo implements TweetStatsGeo{
 	private ArrayList<Double> distances = new ArrayList<Double>();
 	private StatsGeo statistics = new StatsGeo();
 	
+	@Override
 	public void setStatsGeo(Collection<Tweet> sample, String city) throws EmptyCollectionException, CityNotFoundException{
 		try {
 			for(Tweet t : sample) {
@@ -61,6 +62,7 @@ public class TweetStatsGeoImpl extends StatsGeo implements TweetStatsGeo{
 		}
 	}
 	
+	@Override
 	public StatsGeo getStatsGeo() {
 		return statistics;
 	}

@@ -1,6 +1,6 @@
 package it.univpm.progettoOOP.exceptions;
 
-public class IllegalIntervalException extends IllegalArgumentException{
+public class IllegalIntervalException extends Exception{
 	
 	public IllegalIntervalException() {
 		super();
