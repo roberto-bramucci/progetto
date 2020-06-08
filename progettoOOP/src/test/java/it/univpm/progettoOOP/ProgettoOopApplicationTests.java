@@ -25,13 +25,20 @@ import it.univpm.progettoOOP.util.stats.TweetStatsGeo;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeoImpl;
 import it.univpm.progettoOOP.util.stats.TweetStatsTextImpl;
 
-@SpringBootTest
+/**
+ * Rappresenta la classe che esegue i test sulle chiamate al controller
+ * @author Roberto Bramucci, Stefano Bonci
+ *
+ */
 class ProgettoOopApplicationTests {
 
 	
 	private Tweet t = new Tweet();
 
-	
+	/**
+	 * il test verifica se la chiamata del controller getMeta avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetMetadataSuccess() throws URISyntaxException 
 	{
@@ -47,6 +54,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getData avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetDataSuccess() throws URISyntaxException 
 	{
@@ -62,6 +73,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getDataWithFilter avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
     public void testGetDataWithCitySuccess() throws URISyntaxException 
     {
@@ -83,6 +98,10 @@ class ProgettoOopApplicationTests {
         assertEquals(200, result.getStatusCodeValue());
     }
 	
+	/**
+	 * il test verifica se la chiamata del controller getTweetId avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetTweetFromIdSuccess() throws URISyntaxException 
 	{
@@ -98,6 +117,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getTweetText avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetTweetsFromTextSuccess() throws URISyntaxException 
 	{
@@ -113,6 +136,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getStatsTextNoFilter avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetStatsTextNoFilterSuccess() throws URISyntaxException 
 	{
@@ -128,6 +155,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getStatsText avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
 	public void testGetStatsWithTextSuccess() throws URISyntaxException 
 	{
@@ -143,6 +174,10 @@ class ProgettoOopApplicationTests {
 	  
 	}
 	
+	/**
+	 * il test verifica se la chiamata del controller getStatsTextWithFilter avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
     public void testGetStatsGeoSuccess() throws URISyntaxException 
     {
@@ -164,7 +199,10 @@ class ProgettoOopApplicationTests {
         assertEquals(200, result.getStatusCodeValue());
     }
 	
-	
+	/**
+	 * il test verifica se la chiamata del controller getStatsGeoWithFilter avviene con successo
+	 * @throws URISyntaxException
+	 */
 	@Test
     public void testGetStatsWithTextAndCitySuccess() throws URISyntaxException 
     {

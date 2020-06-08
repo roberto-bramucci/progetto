@@ -14,10 +14,16 @@ import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
 import it.univpm.progettoOOP.exceptions.GenericFilterException;
 import it.univpm.progettoOOP.exceptions.IllegalIdException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
+import it.univpm.progettoOOP.exceptions.IllegalWordException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
+import it.univpm.progettoOOP.exceptions.WordNotFoundException;
 import it.univpm.progettoOOP.model.Tweet;
 import it.univpm.progettoOOP.util.filter.FilterIdTextImpl;
 import it.univpm.progettoOOP.util.filter.FilterUtils;
+
+/** Rappresenta la classe che esegue i test sulle eccezioni personalizzate
+ * @author Roberto Bramucci, Stefano Bonci
+*/
 
 public class TestExceptions<T> {
 	
@@ -25,7 +31,10 @@ public class TestExceptions<T> {
 	private FilterIdTextImpl fiti = new FilterIdTextImpl();
 	
 	
-	
+	/**
+	 * il test verifica se viene lanciata l'eccezione CityNotFoundException quando viene passata
+	 * una città diversa da quelle disponibili per eseguire filtraggi o ottenere statistiche
+	 */
 	@Test
 	public void cityNotFoundExceptionSucceeds() {
 		Exception exception = assertThrows(CityNotFoundException.class, () -> { t.chooseCity("TO");});
@@ -36,6 +45,10 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
+	/**
+	 * il test verifica se viene lanciata l'eccezione IllegalIdException se viene passato un id non presente tra quelli disponibili
+	 * al metodo getTweetFromId 
+	 */
 	@Test
 	public void illegalIdExceptionSucceeds() {
 		Exception exception = assertThrows(IllegalIdException.class, () -> { Collection<Tweet> sample = new ArrayList<Tweet>();
@@ -47,18 +60,23 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
-	@Test
+	/*@Test
 	public void filterNotFoundExceptionSucceeds() {
 		Exception exception = assertThrows(FilterNotFoundException.class, () -> { 
 		Point2D.Double p = new Point2D.Double(7.6777,45.0702);
 		Tweet value = new Tweet("1264994235180253190","TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the acrobatic Italian Air Force Squad) flew over Turin today.\n\nThey started from #Codogno (the town which the symbol of the fight against #covid_19) and will fly over many… https://t.co/i99LXh2k8K",p);
 		Double th = 10.0;
 		FilterUtils.check(value, "$lts", "AN", th);});
-		String expectedMessage = "Il filtro inserito non esiste";
+		String expectedMessage = "Il filtro inserito è incompleto o scorretto";
 	    String actualMessage = exception.getMessage();
 	 
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
+	*/
+	
+	/**
+	 * il test verifica se viene lanciata l'eccezione IllegalIntervalException se vengono passati valori errati nel filtraggio $bt
+	 */
 	
 	@Test
 	public void illegalIntervalExceptionSucceeds() {
@@ -73,6 +91,11 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
+	/**
+	 * il test verifica se viene lanciata l'eccezione NegativeValueException se viene passato un valore negativo per 
+	 * la distanza nella quale eseguire il filtraggio
+	 */
+	
 	@Test
 	public void negativeValueExceptionSucceeds() {
 		Exception exception = assertThrows(NegativeValueException.class, () -> { 
@@ -86,6 +109,9 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
+	/**
+	 * il test verifica se viene lanciata l'eccezione GenericFilterException se vengono passati valori errati per eseguire un filtraggio
+	 */
 	@Test
 	public void genericFilterExceptionSucceeds() {
 		Exception exception = assertThrows(GenericFilterException.class, () -> { 
@@ -97,6 +123,38 @@ public class TestExceptions<T> {
 	 
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
+	
+	/**
+	 * il test verifica se viene lanciata l'eccezione IllegalWordException quando viene passata una parola troppo corta
+	 *  al metodo getTweetFromText
+	 */
+	@Test
+	public void illegalWordExceptionSucceeds() {
+		Exception exception = assertThrows(IllegalWordException.class, () -> { 
+		Collection<Tweet> sample = new ArrayList<Tweet>();
+		fiti.getTweetsFromText(sample, "a");});
+		String expectedMessage = "Inserire una parola più lunga";
+	    String actualMessage = exception.getMessage();
+	 
+	    assertTrue(actualMessage.contains(expectedMessage));
+	}
+	
+	/**
+	 * il test verifica se viene lanciata l'eccezione se non viene riconosciuta una parola passata al metodo getTweetFromText
+	 */
+	
+	@Test
+	public void wordNotFoundExceptionSucceeds() {
+		Exception exception = assertThrows(WordNotFoundException.class, () -> { 
+		Collection<Tweet> sample = new ArrayList<Tweet>();
+		fiti.getTweetsFromText(sample, "https://t.co/i99LXh2k8K");});
+		String expectedMessage = "La parola inserita non è disponibile";
+	    String actualMessage = exception.getMessage();
+	 
+	    assertTrue(actualMessage.contains(expectedMessage));
+	}
+	
+	
 
 }
 
