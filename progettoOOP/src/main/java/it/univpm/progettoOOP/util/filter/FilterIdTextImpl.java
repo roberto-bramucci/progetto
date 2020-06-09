@@ -1,21 +1,25 @@
 package it.univpm.progettoOOP.util.filter;
 
-import java.awt.FontFormatException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import org.apache.coyote.http11.Http11InputBuffer;
-import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
 import it.univpm.progettoOOP.exceptions.IllegalIdException;
 import it.univpm.progettoOOP.exceptions.IllegalWordException;
 import it.univpm.progettoOOP.exceptions.WordNotFoundException;
 import it.univpm.progettoOOP.model.Tweet;
-
+/**
+ * Classe che contiene l'implementazione dei metodi dichiarati in FilterIdText 
+ * 
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
+ * 
+ * @version 1.0
+ *
+ */
 public class FilterIdTextImpl implements FilterIdText{
-	
+	/**
+	 * Collection che contiene i dati Tweet filtrati in base al campo text
+	 */
 	Collection<Tweet> filteredTexts = new ArrayList<Tweet>();
 	
 	@Override

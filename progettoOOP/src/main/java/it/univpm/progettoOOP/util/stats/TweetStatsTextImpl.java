@@ -5,10 +5,22 @@ import java.util.Collection;
 
 import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.model.Tweet;
-
+/**
+ * Classe che contiene l'implementazione dei metodi dichiarati in TweetStatsText
+ * 
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
+ * 
+ * @version 1.0
+ */
 public class TweetStatsTextImpl extends StatsText implements TweetStatsText{
-	
+	/**
+	 * Collection che contiene i dati Tweet su cui calcolare le statistiche relative al campo text
+	 */
 	private ArrayList<Integer> length = new ArrayList<Integer>();
+	/**
+	 * Oggetto di tipo StatsText che contiene le statistiche calcolate
+	 */
 	private StatsText statistics = new StatsText();
 	
 	@Override
