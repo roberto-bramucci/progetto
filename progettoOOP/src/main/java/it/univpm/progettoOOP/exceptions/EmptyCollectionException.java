@@ -1,7 +1,8 @@
 package it.univpm.progettoOOP.exceptions;
 /**
- * classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene restituita una collection vuota
- * @author Roberto Bramucci, Stefano Bonci
+ * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene restituita una Collection vuota
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 public class EmptyCollectionException extends Exception{

@@ -1,7 +1,9 @@
 package it.univpm.progettoOOP.exceptions;
 /**
- * classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passata una parola non valida
- * @author Roberto Bramucci, Stefano Bonci
+ * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passata 
+ * una parola troppo corta
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 public class IllegalWordException extends Exception{
