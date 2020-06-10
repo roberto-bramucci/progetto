@@ -2,8 +2,11 @@ package it.univpm.progettoOOP.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -289,25 +292,31 @@ public class TweetController {
 	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json, String city)
 			throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
 			IllegalIntervalException, GenericFilterException {
+		Map<String, ArrayList<Tweet>> filters = new HashMap<String, ArrayList<Tweet>>();
+		filters.put("$lt", null);
+		filters.put("$gt", null);
+		filters.put("$gte", null);
+		filters.put("$lte", null);
+		filters.put("$eq", null);
+		filters.put("$bt", null);
 		String name = json.keys().next();
-		switch (name) {
-		case "$lt":
-        case "$gt":
-        case "$gte":
-        case "$lte":
-        case "$eq":
-    	{
-    		double rif = json.getDouble(name);
-			return twFIl.chooseFilter(name, city, rif);
-    	}
-        case "$bt":
-        {
-        	 double min = json.getJSONArray(name).getDouble(0);
-             double max = json.getJSONArray(name).getFloat(1);
-             return twFIl.chooseFilter(name, city, min, max);
-        }
-        default:
-        	throw new FilterNotFoundException("Il filtro inserito non esiste");
-		}	
-	} 
+		if(!filters.containsKey(name))
+			throw new FilterNotFoundException("Il filtro inserito non esiste");
+		if(json.get(name) instanceof Number) {
+			double rif = json.getDouble(name);
+   			filters.put("$lt", twFIl.chooseFilter(name, city, rif));
+   			filters.put("$gt", twFIl.chooseFilter(name, city, rif));
+   			filters.put("$gte", twFIl.chooseFilter(name, city, rif));
+   			filters.put("$lte", twFIl.chooseFilter(name, city, rif));
+   			filters.put("$eq", twFIl.chooseFilter(name, city, rif));
+   			return filters.get(name);
+		}
+		else if(json.get(name) instanceof JSONArray) {
+			double min = json.getJSONArray(name).getDouble(0);
+			double max = json.getJSONArray(name).getFloat(1);
+			filters.put("$bt", twFIl.chooseFilter(name, city, min, max));
+			return filters.get(name);
+		}
+		throw new GenericFilterException("Errore nella scelta del valore del filtro");	
+	}
 }

@@ -2,6 +2,8 @@ package it.univpm.progettoOOP.model;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 
@@ -111,14 +113,13 @@ public class Tweet {
 	 */
 	
 	public double chooseCity(String city) throws CityNotFoundException{
-		if(city.equals("AN"))
-			return getDistanceAncona();
-		else if(city.equals("RM"))
-			return getDistanceRoma();
-		else if(city.equals("MI"))
-			return getDistanceMilano();
-		else if(city.equals("NP"))
-			return getDistanceNapoli();
+		Map<String, java.lang.Double> cities = new HashMap<>();
+		cities.put("AN", getDistanceAncona());
+		cities.put("RM", getDistanceRoma());
+		cities.put("MI", getDistanceMilano());
+		cities.put("NP", getDistanceNapoli());
+		if(cities.containsKey(city))
+			return cities.get(city);
 		else
 			throw new CityNotFoundException("Questa città non è disponibile");
 	}
