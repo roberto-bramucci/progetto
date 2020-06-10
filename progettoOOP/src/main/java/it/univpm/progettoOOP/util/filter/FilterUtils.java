@@ -9,7 +9,30 @@ import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.model.Tweet;
 
-public class FilterUtils<T> {
+/**
+ * Classe per la determinazione del filtro richiesto e la selezione dei dati che soddisfano 
+ * i requisiti inseriti
+ * 
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
+ *
+ * @param <E> Tipo dell'oggetto da filtrare
+ */
+public class FilterUtils<E> {
+	
+	/**
+	 * Metodo per la verifica del filtro inserito
+	 * 
+	 * @param value Oggetto Tweet da confrontare con il valore del filtro 
+	 * @param operator Operatore del filtro
+	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param th Valori relativi al filtro
+	 * @return Valore boolean. Restituisce true se il campo geo del Tweet verifica la condizione del filtro
+	 * @throws CityNotFoundException
+	 * @throws IllegalIntervalException
+	 * @throws NegativeValueException
+	 * @throws GenericFilterException
+	 */
 	
 	public static boolean check(Tweet value, String operator, String city, Double... th)
 			throws CityNotFoundException, IllegalIntervalException, NegativeValueException, GenericFilterException{
@@ -40,6 +63,20 @@ public class FilterUtils<T> {
 		}
 		throw new GenericFilterException("Errore nella scelta del filtro");
 	}
+	
+	/**
+	 * Metodo per selezionare i dati che soddisfano i requisiti relativi al filtro inserito
+	 * 
+	 * @param src Dataset iniziale
+	 * @param operator Operatore del filtro
+	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param value Valori relativi al filtro
+	 * @return Dataset filtrato
+	 * @throws CityNotFoundException
+	 * @throws IllegalIntervalException
+	 * @throws NegativeValueException
+	 * @throws GenericFilterException
+	 */
 	
 	public Collection<Tweet> select(Collection<Tweet> src, String operator, String city, Double... value) 
 			throws CityNotFoundException, IllegalIntervalException, NegativeValueException, GenericFilterException{

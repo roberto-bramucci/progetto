@@ -1,7 +1,9 @@
 package it.univpm.progettoOOP.exceptions;
 /**
- * classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passato un intervallo non corretto
- * @author Roberto Bramucci, Stefano Bonci
+ * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passato 
+ * un intervallo di distanze non corretto nel filtro
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 public class IllegalIntervalException extends Exception{

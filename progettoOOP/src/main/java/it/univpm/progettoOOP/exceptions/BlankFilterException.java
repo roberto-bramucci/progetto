@@ -1,8 +1,9 @@
 package it.univpm.progettoOOP.exceptions;
 
 /**
- * classe che rappresenta un'eccezione personalizzata che viene lanciata quando il filtro inserito è vuoto
- * @author Roberto Bramucci, Stefano Bonci
+ * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando il filtro inserito è vuoto
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 public class BlankFilterException extends Exception{

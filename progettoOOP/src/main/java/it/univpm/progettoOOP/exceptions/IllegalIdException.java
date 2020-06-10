@@ -2,7 +2,8 @@ package it.univpm.progettoOOP.exceptions;
 /**
  * classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passato un id non presente tra quelli 
  * disponibili
- * @author Roberto Bramucci, Stefano Bonci
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 public class IllegalIdException extends Exception {
