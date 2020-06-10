@@ -26,17 +26,14 @@ import it.univpm.progettoOOP.util.stats.TweetStatsGeoImpl;
 import it.univpm.progettoOOP.util.stats.TweetStatsTextImpl;
 
 /**
- * Rappresenta la classe che esegue i test sulle chiamate al controller
- * @author Roberto Bramucci, Stefano Bonci
+ * Classe che esegue i test sulle chiamate del TweetContoller
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 class ProgettoOopApplicationTests {
-
-	
-	private Tweet t = new Tweet();
-
 	/**
-	 * il test verifica se la chiamata del controller getMeta avviene con successo
+	 * Test che verifica se la chiamata del controller getMeta avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -48,14 +45,12 @@ class ProgettoOopApplicationTests {
 	    URI uri = new URI(baseUrl);
 	 
 	    ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-	     
-	    //Verify request succeed
+	    
 	    assertEquals(200, result.getStatusCodeValue());
-	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getData avviene con successo
+	 * Test che verifica se la chiamata del controller getData avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -67,14 +62,12 @@ class ProgettoOopApplicationTests {
 	    URI uri = new URI(baseUrl);
 	 
 	    ResponseEntity<Collection> result = restTemplate.getForEntity(uri, Collection.class);
-	     
-	    //Verify request succeed
+	    
 	    assertEquals(200, result.getStatusCodeValue());
-	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getDataWithFilter avviene con successo
+	 * Test che verifica se la chiamata del controller getDataWithFilter avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -83,7 +76,6 @@ class ProgettoOopApplicationTests {
         final String baseUrl = "http://localhost:"+8080+"/data/AN";
         URI uri = new URI(baseUrl);
         
-       
         String filter = new String("{\"$gt\":100}");
        
         HttpHeaders headers = new HttpHeaders();
@@ -94,12 +86,11 @@ class ProgettoOopApplicationTests {
         
         ResponseEntity<Collection> result = restTemplate.postForEntity(uri, request, Collection.class);
          
-        //Verify request succeed
         assertEquals(200, result.getStatusCodeValue());
     }
 	
 	/**
-	 * il test verifica se la chiamata del controller getTweetId avviene con successo
+	 * Test che verifica se la chiamata del controller getTweetId avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -111,14 +102,12 @@ class ProgettoOopApplicationTests {
 	    URI uri = new URI(baseUrl);
 	 
 	    ResponseEntity<Tweet> result = restTemplate.getForEntity(uri, Tweet.class);
-	     
-	    //Verify request succeed
+	    
 	    assertEquals(200, result.getStatusCodeValue());
-	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getTweetText avviene con successo
+	 * Test che verifica se la chiamata del controller getTweetText avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -130,14 +119,13 @@ class ProgettoOopApplicationTests {
 	    URI uri = new URI(baseUrl);
 	 
 	    ResponseEntity<Collection> result = restTemplate.getForEntity(uri, Collection.class);
-	     
-	    //Verify request succeed
+	    
 	    assertEquals(200, result.getStatusCodeValue());
 	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getStatsTextNoFilter avviene con successo
+	 * Test che verifica se la chiamata del controller getStatsTextNoFilter avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -150,13 +138,12 @@ class ProgettoOopApplicationTests {
 	 
 	    ResponseEntity<TweetStatsTextImpl> result = restTemplate.getForEntity(uri, TweetStatsTextImpl.class);
 	     
-	    //Verify request succeed
 	    assertEquals(200, result.getStatusCodeValue());
 	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getStatsText avviene con successo
+	 * Test che verifica se la chiamata del controller getStatsText avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -168,14 +155,13 @@ class ProgettoOopApplicationTests {
 	    URI uri = new URI(baseUrl);
 	 
 	    ResponseEntity<TweetStatsTextImpl> result = restTemplate.getForEntity(uri, TweetStatsTextImpl.class);
-	     
-	    //Verify request succeed
+	   
 	    assertEquals(200, result.getStatusCodeValue());
 	  
 	}
 	
 	/**
-	 * il test verifica se la chiamata del controller getStatsTextWithFilter avviene con successo
+	 * Test che verifica se la chiamata del controller getStatsTextWithFilter avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -184,7 +170,6 @@ class ProgettoOopApplicationTests {
         final String baseUrl = "http://localhost:"+8080+"/data/stats/geo/AN";
         URI uri = new URI(baseUrl);
         
-       
         String filter = new String("{\"$gt\":100}");
        
         HttpHeaders headers = new HttpHeaders();
@@ -194,13 +179,12 @@ class ProgettoOopApplicationTests {
         RestTemplate restTemplate = new RestTemplate();
         
         ResponseEntity<TweetStatsGeoImpl> result = restTemplate.postForEntity(uri, request, TweetStatsGeoImpl.class);
-         
-        //Verify request succeed
+        
         assertEquals(200, result.getStatusCodeValue());
     }
 	
 	/**
-	 * il test verifica se la chiamata del controller getStatsGeoWithFilter avviene con successo
+	 * Test che verifica se la chiamata del controller getStatsGeoWithFilter avviene con successo
 	 * @throws URISyntaxException
 	 */
 	@Test
@@ -208,19 +192,17 @@ class ProgettoOopApplicationTests {
     {
         final String baseUrl = "http://localhost:"+8080+"/data/stats/text/Tricolore/AN";
         URI uri = new URI(baseUrl);
-        
-       
+
         String filter = new String("{\"$gt\":100}");
        
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");      
- 
+        
         HttpEntity<String> request = new HttpEntity<String>(filter, headers);
         RestTemplate restTemplate = new RestTemplate();
         
         ResponseEntity<TweetStatsTextImpl> result = restTemplate.postForEntity(uri, request, TweetStatsTextImpl.class);
-         
-        //Verify request succeed
+        
         assertEquals(200, result.getStatusCodeValue());
     }
 	

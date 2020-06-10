@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.GenericFilterException;
+import it.univpm.progettoOOP.exceptions.GenericServiceException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.model.Tweet;
@@ -23,15 +24,15 @@ public class FilterUtils<E> {
 	/**
 	 * Metodo per la verifica del filtro inserito
 	 * 
-	 * @param value Oggetto Tweet da confrontare con il valore del filtro 
+	 * @param value Oggetto {@link Tweet} da confrontare con il valore del filtro 
 	 * @param operator Operatore del filtro
-	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param city Citta' da cui si vuole considerare la distanza 
 	 * @param th Valori relativi al filtro
 	 * @return Valore boolean. Restituisce true se il campo geo del Tweet verifica la condizione del filtro
-	 * @throws CityNotFoundException
-	 * @throws IllegalIntervalException
-	 * @throws NegativeValueException
-	 * @throws GenericFilterException
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws GenericFilterException {@link GenericServiceException}
 	 */
 	
 	public static boolean check(Tweet value, String operator, String city, Double... th)
@@ -48,7 +49,7 @@ public class FilterUtils<E> {
 			else if (operator.equals("$lt"))
 				return valuec < thC;
 			else if (operator.equals("$lte"))
-				return valuec <= thC;			
+				return valuec <= thC;
 		}
 		else if (th.length == 2 && th[0] instanceof Double && th[1] instanceof Double && value instanceof Tweet) {
 			Double thC1 = (Double)th[0];
@@ -69,13 +70,13 @@ public class FilterUtils<E> {
 	 * 
 	 * @param src Dataset iniziale
 	 * @param operator Operatore del filtro
-	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param city Citta' da cui si vuole considerare la distanza 
 	 * @param value Valori relativi al filtro
 	 * @return Dataset filtrato
-	 * @throws CityNotFoundException
-	 * @throws IllegalIntervalException
-	 * @throws NegativeValueException
-	 * @throws GenericFilterException
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws GenericFilterException {@link GenericServiceException}
 	 */
 	
 	public Collection<Tweet> select(Collection<Tweet> src, String operator, String city, Double... value) 

@@ -1,6 +1,9 @@
 package it.univpm.progettoOOP.util.stats;
+
+import it.univpm.progettoOOP.model.Tweet;
+
 /**
- * Classe per la modellazione delle statistiche relative al campo text di un campione di dati di tipo Tweet
+ * Classe per la modellazione delle statistiche relative al campo text di un campione di dati di tipo {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -13,19 +16,19 @@ public class StatsText {
 	 */
 	private final String field = "text";
 	/**
-	 * Statistica relativa alla lunghezza media del testo dei Tweet analizzati
+	 * Statistica relativa alla lunghezza media del testo dei {@link Tweet} analizzati
 	 */
 	private double avgLength;
 	/**
-	 * Statistica relativa alla lunghezza massima del testo dei Tweet analizzati
+	 * Statistica relativa alla lunghezza massima del testo dei {@link Tweet} analizzati
 	 */
 	private double maxLength;
 	/**
-	 * Statistica relativa alla lunghezza minima del testo dei Tweet analizzati
+	 * Statistica relativa alla lunghezza minima del testo dei {@link Tweet} analizzati
 	 */
 	private double minLength;
 	/**
-	 * Statistica relativa alla lunghezza totale del testo dei Tweet analizzati
+	 * Statistica relativa alla lunghezza totale del testo dei {@link Tweet} analizzati
 	 */
 	private double sumLength;
 	/**
@@ -61,7 +64,7 @@ public class StatsText {
 	
 	/**
 	 * Metodo per impostare la lunghezza media
-	 * @param Lunghezza media
+	 * @param avgLength Lunghezza media
 	 */
 	public void setAvgLength(double avgLength) {
 		this.avgLength = avgLength;
@@ -77,7 +80,7 @@ public class StatsText {
 	
 	/**
 	 * Metodo per impostare la lunghezza massima
-	 * @param Lunghezza massima
+	 * @param maxLength Lunghezza massima
 	 */
 	
 	public void setMaxLength(double maxLength) {
@@ -95,7 +98,7 @@ public class StatsText {
 	
 	/**
 	 * Metodo per impostare la lunghezza minima
-	 * @param Lunghezza minima
+	 * @param minLength Lunghezza minima
 	 */
 	
 	public void setMinLength(double minLength) {
@@ -113,15 +116,15 @@ public class StatsText {
 	
 	/**
 	 * Metodo per impostare la lunghezza totale
-	 * @param Lunghezza totale
+	 * @param sumLength Lunghezza totale
 	 */
 	
 	public void setSumLength(double sumLength) {
 		this.sumLength = sumLength;
 	}
 	/**
-	 * Metodo per ottenere il numero di Tweet analizzati
-	 * @return Numero di Tweet analizzati
+	 * Metodo per ottenere il numero di {@link Tweet} analizzati
+	 * @return Numero di {@link Tweet} analizzati
 	 */
 
 	public int getNumTweetAnalyzed() {
@@ -129,8 +132,8 @@ public class StatsText {
 	}
 	
 	/**
-	 * Metodo per impostare il numero di Tweet analizzati
-	 * @param Numero di Tweet analizzati
+	 * Metodo per impostare il numero di {@link Tweet} analizzati
+	 * @param numTweetAnalyzed Numero di {@link Tweet} analizzati
 	 */
 
 	public void setNumTweetAnalyzed(int numTweetAnalyzed) {

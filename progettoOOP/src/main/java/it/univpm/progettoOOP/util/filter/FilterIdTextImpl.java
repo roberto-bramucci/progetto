@@ -8,7 +8,7 @@ import it.univpm.progettoOOP.exceptions.IllegalWordException;
 import it.univpm.progettoOOP.exceptions.WordNotFoundException;
 import it.univpm.progettoOOP.model.Tweet;
 /**
- * Classe che contiene l'implementazione dei metodi dichiarati in FilterIdText 
+ * Classe che contiene l'implementazione dei metodi dichiarati in {@link FilterIdText} 
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -18,7 +18,7 @@ import it.univpm.progettoOOP.model.Tweet;
  */
 public class FilterIdTextImpl implements FilterIdText{
 	/**
-	 * Collection che contiene i dati Tweet filtrati in base al campo text
+	 * Collection che contiene i dati {@link Tweet} filtrati in base al campo text
 	 */
 	Collection<Tweet> filteredTexts = new ArrayList<Tweet>();
 	

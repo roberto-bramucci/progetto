@@ -8,7 +8,7 @@ import java.util.Map;
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 
 /**
- * Classe per la modellazione di un dato di tipo Tweet
+ * Classe per la modellazione di un dato di tipo {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -19,15 +19,15 @@ import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 
 public class Tweet {
 	/**
-	 * id del Tweet
+	 * id del {@link Tweet}
 	 */
 	private String id;
 	/**
-	 * Testo del Tweet
+	 * Testo del {@link Tweet}
 	 */
 	private String text;
 	/**
-	 * Coordinate del Tweet
+	 * Coordinate del {@link Tweet}
 	 */
 	private Point2D.Double geo;
 	
@@ -39,9 +39,9 @@ public class Tweet {
 	/**
 	 * Costruttore con parametri
 	 * 
-	 * @param id id del Tweet
-	 * @param text Testo del Tweet
-	 * @param geo Coordinate del Tweet
+	 * @param id id del {@link Tweet}
+	 * @param text Testo del {@link Tweet}
+	 * @param geo Coordinate del {@link Tweet}
 	 */
 	
 	public Tweet(String id, String text, Double geo) {
@@ -51,8 +51,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere l'id del Tweet
-	 * @return id del Tweet
+	 * Metodo per ottenere l'id del {@link Tweet}
+	 * @return id del {@link Tweet}
 	 */
 
 	public String getId() {
@@ -60,8 +60,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per impostare l'id del Tweet
-	 * @param id id del Tweet
+	 * Metodo per impostare l'id del {@link Tweet}
+	 * @param id id del {@link Tweet}
 	 */
 
 	public void setId(String id) {
@@ -69,8 +69,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere il testo del Tweet
-	 * @return Testo del Tweet
+	 * Metodo per ottenere il testo del {@link Tweet}
+	 * @return Testo del {@link Tweet}
 	 */
 
 	public String getText() {
@@ -78,8 +78,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per impostare il testo del Tweet
-	 * @param text Testo del Tweet
+	 * Metodo per impostare il testo del {@link Tweet}
+	 * @param text Testo del {@link Tweet}
 	 */
 
 	public void setText(String text) {
@@ -87,8 +87,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere le coordinate del Tweet
-	 * @return Coordinate del Tweet
+	 * Metodo per ottenere le coordinate del {@link Tweet}
+	 * @return Coordinate del {@link Tweet}
 	 */
 
 	public Point2D.Double getGeo() {
@@ -96,8 +96,8 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per impostare le coordinate del Tweet
-	 * @param geo Coordinate del Tweet
+	 * Metodo per impostare le coordinate del {@link Tweet}
+	 * @param geo Coordinate del {@link Tweet}
 	 */
 
 	public void setGeo(Point2D.Double geo) {
@@ -105,11 +105,11 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo che determina la città da considerare per filtri e statistiche
+	 * Metodo che determina la citta' da considerare per filtri e statistiche
 	 * 
-	 * @param city Città da cui si vuole considerare la distanza 
-	 * @return La distanza del Tweet dalla città specificata
-	 * @throws CityNotFoundException
+	 * @param city Citta' da cui si vuole considerare la distanza 
+	 * @return La distanza del {@link Tweet} dalla città specificata
+	 * @throws CityNotFoundException {@link CityNotFoundException}
 	 */
 	
 	public double chooseCity(String city) throws CityNotFoundException{
@@ -125,7 +125,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere la distanza in chilometri del Tweet da Ancona
+	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Ancona
 	 * 
 	 * @return Distanza in chilometri del Tweet da Ancona
 	 */
@@ -138,7 +138,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere la distanza in chilometri del Tweet da Roma
+	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Roma
 	 * 
 	 * @return Distanza in chilometri del Tweet da Roma
 	 */
@@ -150,7 +150,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere la distanza in chilometri del Tweet da Milano
+	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Milano
 	 * 
 	 * @return Distanza in chilometri del Tweet da Milano
 	 */
@@ -162,7 +162,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Metodo per ottenere la distanza in chilometri del Tweet da Napoli
+	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Napoli
 	 * 
 	 * @return Distanza in chilometri del Tweet da Napoli
 	 */

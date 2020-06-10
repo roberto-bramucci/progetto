@@ -13,7 +13,7 @@ public class ProgettoOopApplication {
 	
 	/**
 	 * Metodo che avvia l'esecuzione del programma
-	 * @param args 
+	 * @param args Argomenti del main
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(ProgettoOopApplication.class, args);

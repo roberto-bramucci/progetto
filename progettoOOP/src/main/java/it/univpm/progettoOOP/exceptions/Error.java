@@ -44,7 +44,7 @@ public class Error {
 	}
 	/**
 	 * Metodo per impostare l'istante in cui viene lanciata l'eccezione
-	 * @param Istante in cui viene lanciata l'eccezione
+	 * @param time Istante in cui viene lanciata l'eccezione
 	 */
 	public void setTime(Instant time) {
 		this.time = time;
@@ -58,7 +58,7 @@ public class Error {
 	}
 	/**
 	 * Metodo per impostare il nome del messaggio di errore
-	 * @param Nome del messaggio di errore
+	 * @param error Nome del messaggio di errore
 	 */
 	public void setError(String error) {
 		this.error = error;
@@ -72,7 +72,7 @@ public class Error {
 	}
 	/**
 	 * Metodo per impostare la descrizione dell'errore
-	 * @return Descrizione dell'errore
+	 * @param message Descrizione dell'errore
 	 */
 	public void setMessage(String message) {
 		this.message = message;

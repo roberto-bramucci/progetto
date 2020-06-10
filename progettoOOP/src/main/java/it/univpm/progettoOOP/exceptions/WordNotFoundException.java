@@ -6,11 +6,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class WordNotFoundException extends Exception{
-	
+	/**
+	 * Costruttore di default
+	 */
 	public WordNotFoundException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public WordNotFoundException(String message) {
 		super(message);
 	}

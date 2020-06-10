@@ -6,7 +6,7 @@ import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.model.Tweet;
 /**
- * Interfaccia per la dichiarazione dei metodi utili per il calcolo delle statistiche relative al campo geo di Tweet
+ * Interfaccia per la dichiarazione dei metodi utili per il calcolo delle statistiche relative al campo geo di {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -16,15 +16,15 @@ import it.univpm.progettoOOP.model.Tweet;
 
 public interface TweetStatsGeo {
 	/**
-	 * Metodo per l'impostazione delle statistiche relative al campo geo di Tweet
-	 * @param sample Campione di Tweet analizzato
-	 * @param city Città da cui si vuole calcolare la distanza
-	 * @throws EmptyCollectionException
-	 * @throws CityNotFoundException
+	 * Metodo per l'impostazione delle statistiche relative al campo geo di {@link Tweet}
+	 * @param sample Campione di {@link Tweet} analizzato
+	 * @param city Citta' da cui si vuole calcolare la distanza
+	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
 	 */
 	public void setStatsGeo(Collection<Tweet> sample, String city) throws EmptyCollectionException, CityNotFoundException;
 	/**
-	 * Metodo per ottenere le statistiche relative al campo geo di Tweet
+	 * Metodo per ottenere le statistiche relative al campo geo di {@link Tweet}
 	 * @return Statistiche relative al campo geo
 	 */
 	

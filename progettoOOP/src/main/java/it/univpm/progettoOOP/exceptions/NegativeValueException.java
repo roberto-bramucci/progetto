@@ -7,11 +7,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class NegativeValueException extends Exception{
-
+	/**
+	 * Costruttore di default
+	 */
 	public NegativeValueException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public NegativeValueException(String message) {
 		super(message);
 	}

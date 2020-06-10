@@ -1,6 +1,9 @@
 package it.univpm.progettoOOP.util.stats;
+
+import it.univpm.progettoOOP.model.Tweet;
+
 /**
- * Classe per la modellazione delle statistiche relative al campo geo di un campione di dati di tipo Tweet
+ * Classe per la modellazione delle statistiche relative al campo geo di un campione di dati di tipo {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -13,31 +16,31 @@ public class StatsGeo {
 	 */
 	private final String field = "geo";
 	/**
-	 * Statistica relativa alla distanza media dalla città scelta dei Tweet analizzati
+	 * Statistica relativa alla distanza media dalla città scelta dei {@link Tweet} analizzati
 	 */
 	private double avgDist;
 	/**
-	 * Statistica relativa alla distanza massima dalla città scelta dei Tweet analizzati 
+	 * Statistica relativa alla distanza massima dalla città scelta dei {@link Tweet} analizzati 
 	 */
 	private double maxDist;
 	/**
-	 * Statistica relativa alla distanza minima dalla città scelta dei Tweet analizzati
+	 * Statistica relativa alla distanza minima dalla città scelta dei {@link Tweet} analizzati
 	 */
 	private double minDist;
 	/**
-	 * Statistica relativa alla distanza totale dalla città scelta dei Tweet analizzati 
+	 * Statistica relativa alla distanza totale dalla città scelta dei {@link Tweet} analizzati 
 	 */
 	private double sumDist;
 	/**
-	 * Statistica relativa alla varianza della distanza dalla città scelta dei Tweet analizzati 
+	 * Statistica relativa alla varianza della distanza dalla città scelta dei {@link Tweet} analizzati 
 	 */
 	private double varDist;
 	/**
-	 * Statistica relativa alla deviazione standard della distanza dalla città scelta dei Tweet analizzati 
+	 * Statistica relativa alla deviazione standard della distanza dalla città scelta dei {@link Tweet} analizzati 
 	 */
 	private double devStdDist;
 	/**
-	 * Numero di Tweet analizzati per calcolare le statistiche 
+	 * Numero di {@link Tweet} analizzati per calcolare le statistiche 
 	 */
 	private int numTweetAnalyzed;
 	
@@ -161,16 +164,16 @@ public class StatsGeo {
 	}
 	
 	/**
-	 * Metodo per ottenere il numero di Tweet analizzati
-	 * @return Numero di Tweet analizzati
+	 * Metodo per ottenere il numero di {@link Tweet} analizzati
+	 * @return Numero di {@link Tweet} analizzati
 	 */
 	
 	public int getNumTweetAnalyzed() {
 		return numTweetAnalyzed;
 	}
 	/**
-	 * Metodo per impostare il numero di Tweet analizzati
-	 * @param numTweetAnalyzed Numero di Tweet analizzati
+	 * Metodo per impostare il numero di {@link Tweet} analizzati
+	 * @param numTweetAnalyzed Numero di {@link Tweet} analizzati
 	 */
 
 	public void setNumTweetAnalyzed(int numTweetAnalyzed) {

@@ -6,11 +6,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class FilterNotFoundException extends Exception{
-	
+	/**
+	 * Costruttore di default
+	 */
 	public FilterNotFoundException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public FilterNotFoundException(String message) {
 		super (message);
 	}

@@ -2,11 +2,8 @@ package it.univpm.progettoOOP.controller;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,7 +51,7 @@ public class TweetController {
 	 * Rotta per ottenere i metadati relativi al dataset in formato JSON
 	 * 
 	 * @return Metadati relativi a un dato di tipo Tweet
-	 * @throws GenericServiceException
+	 * @throws GenericServiceException Eccezione lanciata nel Service
 	 */
 	
 	@RequestMapping(value ="/metadata", method = RequestMethod.GET)
@@ -64,8 +61,8 @@ public class TweetController {
 	/**
 	 * Rotta per ottenere i dati di tipo Tweet relativi al dataset in formato JSON
 	 * 
-	 * @return Dati di tipo Tweet
-	 * @throws GenericServiceException
+	 * @return Dati di tipo {@link Tweet}
+	 * @throws GenericServiceException {@link GenericServiceException}
 	 */
 	
 	@RequestMapping(value ="/data", method = RequestMethod.GET)
@@ -77,16 +74,16 @@ public class TweetController {
 	 * Rotta per ottenere i dati di tipo Tweet filtrati in base alla distanza 
 	 * da una delle città disponibili (Ancona, Milano, Napoli, Roma)
 	 * 
-	 * @param city Città da cui si vuole considerare la distanza
+	 * @param city Citta' da cui si vuole considerare la distanza
 	 * @param filter Filtro di distanza da applicare al dataset
-	 * @return Dati di tipo Tweet filtrati in base alla città scelta, se presenti
-	 * @throws GenericServiceException 
-	 * @throws FilterNotFoundException
-	 * @throws CityNotFoundException
-	 * @throws NegativeValueException
-	 * @throws IllegalIntervalException
-	 * @throws GenericFilterException
-	 * @throws BlankFilterException
+	 * @return Dati di tipo Tweet filtrati in base alla citta' scelta, se presenti
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericFilterException}
+	 * @throws BlankFilterException {@link BlankFilterException}
 	 */
 	
 	@RequestMapping(value ="/data/{city}", method = RequestMethod.POST)
@@ -98,7 +95,7 @@ public class TweetController {
 			JSONObject obj = new JSONObject(filter);
 			FilterUtils<Tweet> utl = new FilterUtils<>();
 			TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-			return new ResponseEntity<>(parseFilter(tweetsFil, obj, city), HttpStatus.OK);
+			return new ResponseEntity<>(tweetsFil.parseFilter(obj, city), HttpStatus.OK);
 			}
 			catch(NoSuchElementException e) {
 				throw new BlankFilterException("Nessun filtro inserito");
@@ -111,10 +108,10 @@ public class TweetController {
 	/**
 	 * Rotta per ottenere un dato di tipo Tweet in base al suo id
 	 * 
-	 * @param id id del dato di tipo Tweet che si vuole ottenere
+	 * @param id id del dato di tipo {@link Tweet} che si vuole ottenere
 	 * @return Tweet corrispondente all'id specificato
-	 * @throws GenericServiceException
-	 * @throws IllegalIdException
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws IllegalIdException {@link IllegalIdException}
 	 */
 		
 	@RequestMapping (value = "/data/id/{id}", method = RequestMethod.GET)
@@ -125,13 +122,13 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere i dati di tipo Tweet filtrati in base ad una parola contenuta nel testo
+	 * Rotta per ottenere i dati di tipo {@link Tweet} filtrati in base ad una parola contenuta nel testo
 	 * 
-	 * @param word Parola contenuta nel testo del Tweet
-	 * @return Tweet che contengono la parola specificata, se presenti
-	 * @throws GenericServiceException
-	 * @throws IllegalWordException
-	 * @throws WordNotFoundException 
+	 * @param word Parola contenuta nel testo del {@link Tweet}
+	 * @return {@link Tweet} che contengono la parola specificata, se presenti
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws IllegalWordException {@link IllegalWordException}
+	 * @throws WordNotFoundException {@link WordNotFoundException}
 	 */
 	
 	@RequestMapping (value = "/data/text/{word}", method = RequestMethod.GET)
@@ -142,11 +139,11 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere statistiche relative alla lunghezza del testo di tutti i Tweet del dataset
+	 * Rotta per ottenere statistiche relative alla lunghezza del testo di tutti i {@link Tweet} del dataset
 	 *  
 	 * @return Statistiche sulla lunghezza del testo
-	 * @throws GenericServiceException
-	 * @throws EmptyCollectionException
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws EmptyCollectionException {@link EmptyCollectionException}
 	 */
 	
 	@RequestMapping(value = "data/stats/text", method = RequestMethod.GET)
@@ -158,15 +155,15 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo Tweet
+	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo {@link Tweet}
 	 * filtrati in base ad una parola contenuta nel testo
 	 * 
-	 * @param word Parola contenuta nel testo del Tweet
+	 * @param word Parola contenuta nel testo del {@link Tweet}
 	 * @return Statistiche sui Tweet che contengono la parola specificata, se presenti
-	 * @throws GenericServiceException
-	 * @throws EmptyCollectionException
-	 * @throws IllegalWordException
-	 * @throws WordNotFoundException
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws IllegalWordException {@link IllegalWordException}
+	 * @throws WordNotFoundException {@link WordNotFoundException}
 	 */
 
 	
@@ -182,25 +179,25 @@ public class TweetController {
 		
 	}
 	/**
-	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo Tweet
-	 * filtrati in base ad una parola contenuta nel testo e alla distanza da una delle città disponibili
+	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo {@link Tweet}
+	 * filtrati in base ad una parola contenuta nel testo e alla distanza da una delle citta' disponibili
 	 *
-	 * @param word Parola contenuta nel testo del Tweet
-	 * @param city Città da cui si vuole considerare la distanza
+	 * @param word Parola contenuta nel testo del {@link Tweet}
+	 * @param city Citta' da cui si vuole considerare la distanza
 	 * @param filter Filtro di distanza ad applicare al dataset
 	 * @return Statistiche sul testo dei Tweet che contengono la parola specificata e 
-	 * filtrati in base alla città scelta
+	 * filtrati in base alla citta' scelta
 	 * 
-	 * @throws GenericServiceException
-	 * @throws FilterNotFoundException
-	 * @throws EmptyCollectionException
-	 * @throws CityNotFoundException
-	 * @throws NegativeValueException
-	 * @throws IllegalIntervalException
-	 * @throws GenericFilterException
-	 * @throws IllegalWordException
-	 * @throws WordNotFoundException
-	 * @throws BlankFilterException
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericFilterException}
+	 * @throws IllegalWordException  {@link IllegalWordException}
+	 * @throws WordNotFoundException {@link WordNotFoundException}
+	 * @throws BlankFilterException {@link BlankFilterException}
 	 */
 	
 	
@@ -214,7 +211,7 @@ public class TweetController {
 				JSONObject obj = new JSONObject(filter);
 				FilterUtils<Tweet> utl = new FilterUtils<>();
 				TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-				ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
+				ArrayList<Tweet> filteredArray = tweetsFil.parseFilter(obj, city);
 				FilterIdText fil = new FilterIdTextImpl();
 				ArrayList<Tweet> newFilteredArray = (ArrayList<Tweet>)fil.getTweetsFromText(filteredArray, word);
 				TweetStatsText tweetStatsText = new TweetStatsTextImpl();
@@ -230,21 +227,21 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere statistiche relative alla distanza dei dati di tipo Tweet dalla città 
-	 * specificata, con la possibilità di inserire filtri di distanza 
+	 * Rotta per ottenere statistiche relative alla distanza dei dati di tipo {@link Tweet} dalla citta' 
+	 * specificata, con la possibilita' di inserire filtri di distanza 
 	 * 
 	 * @param city Città da cui si vuole considerare la distanza
 	 * @param filter Filtro di distanza ad applicare al dataset (facoltativo)
-	 * @return Statistiche sulla distanza dei Tweet, eventualmente
+	 * @return Statistiche sulla distanza dei {@link Tweet}, eventualmente
 	 * filtrati in base alla città scelta
 	 * 
-	 * @throws GenericServiceException
-	 * @throws FilterNotFoundException
-	 * @throws EmptyCollectionException
-	 * @throws CityNotFoundException
-	 * @throws NegativeValueException
-	 * @throws IllegalIntervalException
-	 * @throws GenericFilterException
+	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericFilterException}
 	 */
 	
 	
@@ -264,7 +261,7 @@ public class TweetController {
 				JSONObject obj = new JSONObject(filter);
 				FilterUtils<Tweet> utl = new FilterUtils<>();
 				TweetFilter tweetsFil = new TweetFilter((ArrayList<Tweet>)tweetService.getData(), utl);
-				ArrayList<Tweet> filteredArray = parseFilter(tweetsFil, obj, city);
+				ArrayList<Tweet> filteredArray = tweetsFil.parseFilter(obj, city);
 				TweetStatsGeo tweetStatsGeo = new TweetStatsGeoImpl();
 				tweetStatsGeo.setStatsGeo(filteredArray, city);
 				return new ResponseEntity<>(tweetStatsGeo.getStatsGeo(), HttpStatus.OK);
@@ -273,50 +270,5 @@ public class TweetController {
 				throw new FilterNotFoundException("Il filtro inserito è incompleto");
 			}
 		}
-	}
-	
-	/**
-	 * Metodo che consente di filtrare i dati in base al filtro geo inserito
-	 * 
-	 * @param twFIl Oggetto della classe TweetFilter
-	 * @param json Oggeto della classe JSONObject che contiene il filtro geo
-	 * @param city Città da cui si vuole considerare la distanza 
-	 * @return Dataset filtrato
-	 * @throws FilterNotFoundException
-	 * @throws CityNotFoundException
-	 * @throws NegativeValueException
-	 * @throws IllegalIntervalException
-	 * @throws GenericFilterException
-	 */
-		
-	private ArrayList<Tweet> parseFilter(TweetFilter twFIl, JSONObject json, String city)
-			throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
-			IllegalIntervalException, GenericFilterException {
-		Map<String, ArrayList<Tweet>> filters = new HashMap<String, ArrayList<Tweet>>();
-		filters.put("$lt", null);
-		filters.put("$gt", null);
-		filters.put("$gte", null);
-		filters.put("$lte", null);
-		filters.put("$eq", null);
-		filters.put("$bt", null);
-		String name = json.keys().next();
-		if(!filters.containsKey(name))
-			throw new FilterNotFoundException("Il filtro inserito non esiste");
-		if(json.get(name) instanceof Number) {
-			double rif = json.getDouble(name);
-   			filters.put("$lt", twFIl.chooseFilter(name, city, rif));
-   			filters.put("$gt", twFIl.chooseFilter(name, city, rif));
-   			filters.put("$gte", twFIl.chooseFilter(name, city, rif));
-   			filters.put("$lte", twFIl.chooseFilter(name, city, rif));
-   			filters.put("$eq", twFIl.chooseFilter(name, city, rif));
-   			return filters.get(name);
-		}
-		else if(json.get(name) instanceof JSONArray) {
-			double min = json.getJSONArray(name).getDouble(0);
-			double max = json.getJSONArray(name).getFloat(1);
-			filters.put("$bt", twFIl.chooseFilter(name, city, min, max));
-			return filters.get(name);
-		}
-		throw new GenericFilterException("Errore nella scelta del valore del filtro");	
 	}
 }

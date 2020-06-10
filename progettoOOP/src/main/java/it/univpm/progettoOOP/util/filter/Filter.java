@@ -20,14 +20,14 @@ public interface Filter<E>{
 	 * Metodo per la scelta del filtro geo da applicare al dataset
 	 * 
 	 * @param operator Operatore del filtro
-	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param city Citta' da cui si vuole considerare la distanza 
 	 * @param value Valori relativi al filtro
-	 * @return
-	 * @throws {@link FilterNotFoundException}
-	 * @throws {@link CityNotFoundException}
-	 * @throws {@link NegativeValueException}
-	 * @throws {@link IllegalIntervalException}
-	 * @throws {@link GenericFilterException}
+	 * @return Dataset filtrato relativo al filtro richiesto
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericFilterException}
 	 * 
 	 */
 	abstract Collection<E> chooseFilter(String operator, String city, Double... value)  

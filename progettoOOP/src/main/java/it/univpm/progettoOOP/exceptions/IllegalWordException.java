@@ -7,11 +7,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class IllegalWordException extends Exception{
-	
+	/**
+	 * Costruttore di default
+	 */
 	public IllegalWordException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public IllegalWordException(String message) {
 		super(message);
 	}

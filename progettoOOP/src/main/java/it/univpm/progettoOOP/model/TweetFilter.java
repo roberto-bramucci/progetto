@@ -1,17 +1,23 @@
 package it.univpm.progettoOOP.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
 import it.univpm.progettoOOP.exceptions.GenericFilterException;
+import it.univpm.progettoOOP.exceptions.GenericServiceException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.util.filter.Filter;
 import it.univpm.progettoOOP.util.filter.FilterUtils;
 
 /**
- * Classe per la modellazione dei filtri geo su dati di tipo @see Tweet
+ * Classe per la modellazione dei filtri geo su dati di tipo {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -92,17 +98,58 @@ public class TweetFilter implements Filter<Tweet> {
 	}
 	
 	/**
+	 * Metodo che consente di filtrare i dati in base al filtro geo inserito
+	 * 
+	 * @param json Oggeto della classe JSONObject che contiene il filtro geo
+	 * @param city Citta' da cui si vuole considerare la distanza 
+	 * @return Dataset filtrato relativo al filtro richiesto
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericServiceException}
+	 */
+		
+	public ArrayList<Tweet> parseFilter(JSONObject json, String city)
+			throws FilterNotFoundException, CityNotFoundException, NegativeValueException,
+			IllegalIntervalException, GenericFilterException {
+		Map<String, ArrayList<Tweet>> filters = new HashMap<String, ArrayList<Tweet>>();
+		filters.put("$lt", null);
+		filters.put("$gt", null);
+		filters.put("$gte", null);
+		filters.put("$lte", null);
+		filters.put("$bt", null);
+		String name = json.keys().next();
+		if(!filters.containsKey(name))
+			throw new FilterNotFoundException("Il filtro inserito non esiste");
+		if(json.get(name) instanceof Number) {
+			double rif = json.getDouble(name);
+   			filters.put("$lt", chooseFilter(name, city, rif));
+   			filters.put("$gt", chooseFilter(name, city, rif));
+   			filters.put("$gte", chooseFilter(name, city, rif));
+   			filters.put("$lte", chooseFilter(name, city, rif));
+   			return filters.get(name);
+		}
+		else if(json.get(name) instanceof JSONArray) {
+			double min = json.getJSONArray(name).getDouble(0);
+			double max = json.getJSONArray(name).getFloat(1);
+			filters.put("$bt", chooseFilter(name, city, min, max));
+			return filters.get(name);
+		}
+		throw new GenericFilterException("Errore nella scelta del valore del filtro");	
+	}
+	/**
 	 * Metodo per la scelta del filtro geo da applicare al dataset
 	 * 
 	 * @param operator Operatore del filtro
-	 * @param city Città da cui si vuole considerare la distanza 
+	 * @param city Citta' da cui si vuole considerare la distanza 
 	 * @param value Valori relativi al filtro
-	 * @return
-	 * @throws {@link FilterNotFoundException}
-	 * @throws {@link CityNotFoundException}
-	 * @throws {@link NegativeValueException}
-	 * @throws {@link IllegalIntervalException}
-	 * @throws {@link GenericFilterException}
+	 * @return Dataset filtrato relativo al filtro richiesto
+	 * @throws FilterNotFoundException {@link FilterNotFoundException}
+	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws NegativeValueException {@link NegativeValueException}
+	 * @throws IllegalIntervalException {@link IllegalIntervalException}
+	 * @throws GenericFilterException {@link GenericFilterException}
 	 * 
 	 */
 	

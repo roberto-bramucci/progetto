@@ -25,7 +25,8 @@ import java.net.URL;
 /**
  * Classe per il collegamento con la API di Twitter e il caricamento dei dati.
  * Contiene l'implementazione dei metodi dichiarati in {@link TweetService} 
- * @author HP
+ * @author Roberto Bramucci
+ * @author Stefano Bonci
  *
  */
 @Service
@@ -37,7 +38,7 @@ public class TweetServiceImpl implements TweetService {
 	
 	/**
 	 * Costruttore che ottiene i dati e li salva nella Collection
-	 * @throws GenericServiceException
+	 * @throws GenericServiceException {@link GenericServiceException}
 	 */
 	public TweetServiceImpl() throws GenericServiceException {
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/labs/2/tweets?ids=1264994235180253190,1265011663150989314,1269715922270531586,1265019461968343042,1269673618243563520,1269697614120914952,1269700437902589956,1265023704679043072,1269703231560658945,1265023477146357760,1265009995063734272,1265018699704123397,1264978710358155265,1264987144499556352,1264613421569490950,1264967817977307139,1264973453490151424,1262800745730117632,1264827517854191616,1264819444724961280,1265028908723798017,1265023215971241984,1265052257596264448,1265052710027624450,1265167808423505921,1269676942766288897,1265153348698689536,1265189493876781056,1265188848621019136,1264958770758782977,1264850093624233984,1264781761466249216&tweet.fields=geo";
@@ -72,7 +73,7 @@ public class TweetServiceImpl implements TweetService {
 	 * Metodo per la deserializzazione dei dati e il salvataggio dei campi richiesti
 	 * @param parser Oggetto di tipo JsonParser
 	 * @return Oggetto {@link Tweet} ottenuto dalla deserializzazione
-	 * @throws GenericServiceException
+	 * @throws GenericServiceException {@link GenericServiceException}
 	 */
 	public Tweet deserialize(JsonParser parser) throws GenericServiceException{
 		Tweet tweet = new Tweet();

@@ -7,11 +7,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class IllegalIntervalException extends Exception{
-	
+	/**
+	 * Costruttore di default
+	 */
 	public IllegalIntervalException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public IllegalIntervalException(String message) {
 		super(message);
 	}

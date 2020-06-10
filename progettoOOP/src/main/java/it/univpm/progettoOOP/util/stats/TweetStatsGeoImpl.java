@@ -7,7 +7,7 @@ import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.model.*;
 /**
- * Classe che contiene l'implementazione dei metodi dichiarati in TweetStatsGeo
+ * Classe che contiene l'implementazione dei metodi dichiarati in {@link TweetStatsGeo}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -20,12 +20,10 @@ public class TweetStatsGeoImpl extends StatsGeo implements TweetStatsGeo{
 	 */
 	private ArrayList<Double> distances = new ArrayList<Double>();
 	/**
-	 * Oggetto di tipo StatsGeo che contiene le statistiche calcolate
+	 * Oggetto di tipo {@link StatsGeo} che contiene le statistiche calcolate
 	 */
 	private StatsGeo statistics = new StatsGeo();
-	/**
-	 * Implementazione del metodo definito nell'interfaccia TweetStatsGeo
-	 */
+
 	@Override
 	public void setStatsGeo(Collection<Tweet> sample, String city) throws EmptyCollectionException, CityNotFoundException{
 		try {

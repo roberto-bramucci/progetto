@@ -6,11 +6,16 @@ package it.univpm.progettoOOP.exceptions;
  *
  */
 public class EmptyCollectionException extends Exception{
-
+	/**
+	 * Costruttore di default
+	 */
 	public EmptyCollectionException() {
 		super();
 	}
-	
+	/**
+	 * Costruttore con parametri
+	 * @param message Messaggio di errore lanciato
+	 */
 	public EmptyCollectionException(String message) {
 		super(message);
 	}
