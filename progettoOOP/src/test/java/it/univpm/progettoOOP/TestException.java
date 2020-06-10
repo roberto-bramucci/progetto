@@ -31,7 +31,7 @@ class TestException {
 	 * @author Roberto Bramucci, Stefano Bonci
 	*/
 
-	public class TestExceptions<T> {
+	
 		
 		private Tweet t = new Tweet();
 		private FilterIdTextImpl fiti = new FilterIdTextImpl();
