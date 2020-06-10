@@ -60,19 +60,7 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
-	/*@Test
-	public void filterNotFoundExceptionSucceeds() {
-		Exception exception = assertThrows(FilterNotFoundException.class, () -> { 
-		Point2D.Double p = new Point2D.Double(7.6777,45.0702);
-		Tweet value = new Tweet("1264994235180253190","TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the acrobatic Italian Air Force Squad) flew over Turin today.\n\nThey started from #Codogno (the town which the symbol of the fight against #covid_19) and will fly over many… https://t.co/i99LXh2k8K",p);
-		Double th = 10.0;
-		FilterUtils.check(value, "$lts", "AN", th);});
-		String expectedMessage = "Il filtro inserito è incompleto o scorretto";
-	    String actualMessage = exception.getMessage();
-	 
-	    assertTrue(actualMessage.contains(expectedMessage));
-	}
-	*/
+	
 	
 	/**
 	 * il test verifica se viene lanciata l'eccezione IllegalIntervalException se vengono passati valori errati nel filtraggio $bt
@@ -139,20 +127,8 @@ public class TestExceptions<T> {
 	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 	
-	/**
-	 * il test verifica se viene lanciata l'eccezione se non viene riconosciuta una parola passata al metodo getTweetFromText
-	 */
 	
-	@Test
-	public void wordNotFoundExceptionSucceeds() {
-		Exception exception = assertThrows(WordNotFoundException.class, () -> { 
-		Collection<Tweet> sample = new ArrayList<Tweet>();
-		fiti.getTweetsFromText(sample, "https://t.co/i99LXh2k8K");});
-		String expectedMessage = "La parola inserita non è disponibile";
-	    String actualMessage = exception.getMessage();
-	 
-	    assertTrue(actualMessage.contains(expectedMessage));
-	}
+
 	
 	
 
