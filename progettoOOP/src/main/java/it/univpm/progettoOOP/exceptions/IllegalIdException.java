@@ -4,7 +4,7 @@ package it.univpm.progettoOOP.exceptions;
  * disponibili
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class IllegalIdException extends Exception {
 	/**

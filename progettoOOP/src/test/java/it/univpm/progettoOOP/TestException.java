@@ -8,7 +8,6 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
-import it.univpm.progettoOOP.controller.TweetController;
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
@@ -17,7 +16,6 @@ import it.univpm.progettoOOP.exceptions.IllegalIdException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.IllegalWordException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
-import it.univpm.progettoOOP.exceptions.WordNotFoundException;
 import it.univpm.progettoOOP.model.Tweet;
 import it.univpm.progettoOOP.model.TweetFilter;
 import it.univpm.progettoOOP.service.TweetService;
@@ -26,10 +24,7 @@ import it.univpm.progettoOOP.util.filter.FilterIdTextImpl;
 import it.univpm.progettoOOP.util.filter.FilterUtils;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeo;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeoImpl;
-import it.univpm.progettoOOP.util.stats.TweetStatsText;
-import net.minidev.json.JSONObject;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,10 +34,6 @@ import org.junit.jupiter.api.Test;
 */
 
 class TestException {
-	/**
-	 * Oggetto di {@link Tweet} utilizzato nei test
-	 */
-	private Tweet t = new Tweet();
 	/**
 	 * Oggetto di {@link FilterIdTextImpl} utilizzato nei test
 	 */
@@ -57,6 +48,7 @@ class TestException {
 	public void cityNotFoundExceptionSucceeds() {
 		Exception exception = assertThrows(CityNotFoundException.class, () -> { 
 			Point2D.Double point = new Point2D.Double(12.135, 44.124);
+			Tweet t = new Tweet();
 			t.setGeo(point);
 			t.chooseCity("TO");});
 			

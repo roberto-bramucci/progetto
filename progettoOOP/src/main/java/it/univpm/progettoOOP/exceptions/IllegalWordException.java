@@ -4,7 +4,7 @@ package it.univpm.progettoOOP.exceptions;
  * una parola troppo corta
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class IllegalWordException extends Exception{
 	/**

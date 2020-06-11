@@ -4,7 +4,7 @@ package it.univpm.progettoOOP.exceptions;
  * un intervallo di distanze non corretto nel filtro
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class IllegalIntervalException extends Exception{
 	/**

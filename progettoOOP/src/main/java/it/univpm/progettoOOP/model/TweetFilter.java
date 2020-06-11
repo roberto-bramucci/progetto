@@ -10,14 +10,13 @@ import org.json.JSONObject;
 import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.FilterNotFoundException;
 import it.univpm.progettoOOP.exceptions.GenericFilterException;
-import it.univpm.progettoOOP.exceptions.GenericServiceException;
 import it.univpm.progettoOOP.exceptions.IllegalIntervalException;
 import it.univpm.progettoOOP.exceptions.NegativeValueException;
 import it.univpm.progettoOOP.util.filter.Filter;
 import it.univpm.progettoOOP.util.filter.FilterUtils;
 
 /**
- * Classe per la modellazione dei filtri geo su dati di tipo {@link Tweet}
+ * Classe per la modellazione dei filtri di distanza su dati di tipo {@link Tweet}
  * 
  * @author Roberto Bramucci
  * @author Stefano Bonci
@@ -31,7 +30,7 @@ public class TweetFilter implements Filter<Tweet> {
 	 */
 	private ArrayList<Tweet> sample;
 	/**
-	 * Oggetto della classe FilterUtils per la scelta del filtro
+	 * Oggetto della classe {@link FilterUtils} per la scelta del filtro
 	 */
 	private FilterUtils<Tweet> utils;
 	
@@ -39,7 +38,7 @@ public class TweetFilter implements Filter<Tweet> {
 	 * Costruttore con parametri
 	 * 
 	 * @param sample Dataset da filtrare
-	 * @param utils Oggetto della classe FilterUtils per la scelta del filtro
+	 * @param utils Oggetto della classe {@link FilterUtils} per la scelta del filtro
 	 */
 	
 	public TweetFilter(ArrayList<Tweet> sample, FilterUtils<Tweet> utils) {
@@ -78,9 +77,9 @@ public class TweetFilter implements Filter<Tweet> {
 	}
 	
 	/**
-	 * Metodo per ottenere l'oggetto della classe FilterUtils per la scelta del filtro
+	 * Metodo per ottenere l'oggetto della classe {@link FilterUtils} per la scelta del filtro
 	 * 
-	 * @return Oggetto di FilterUtils
+	 * @return Oggetto di {@link FilterUtils}
 	 */
 	
 	public FilterUtils<Tweet> getUtils() {
@@ -88,9 +87,9 @@ public class TweetFilter implements Filter<Tweet> {
 	}
 	
 	/**
-	 * Metodo per impostare l'oggetto della classe FilterUtils per la scelta del filtro
+	 * Metodo per impostare l'oggetto della classe {@link FilterUtils} per la scelta del filtro
 	 * 
-	 * @param utils Oggetto di FilterUtils
+	 * @param utils Oggetto di {@link FilterUtils}
 	 */
 	
 	public void setUtils(FilterUtils<Tweet> utils) {
@@ -98,16 +97,16 @@ public class TweetFilter implements Filter<Tweet> {
 	}
 	
 	/**
-	 * Metodo che consente di filtrare i dati in base al filtro geo inserito
+	 * Metodo che consente di filtrare i dati in base al filtro di distanza inserito
 	 * 
-	 * @param json Oggeto della classe JSONObject che contiene il filtro geo
+	 * @param json Oggeto della classe JSONObject che contiene il filtro di distanza
 	 * @param city Citta' da cui si vuole considerare la distanza 
 	 * @return Dataset filtrato relativo al filtro richiesto
-	 * @throws FilterNotFoundException {@link FilterNotFoundException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
-	 * @throws NegativeValueException {@link NegativeValueException}
-	 * @throws IllegalIntervalException {@link IllegalIntervalException}
-	 * @throws GenericFilterException {@link GenericServiceException}
+	 * @throws FilterNotFoundException Eccezione lanciata se si inserisce un filtro non disponibile
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
+	 * @throws NegativeValueException Eccezione lanciata se si inserisce un valore negativo nel filtro di distanza
+	 * @throws IllegalIntervalException Eccezione lanciata se si inserisce nel filtro di distanza un intervallo in cui il primo valore e' maggiore del secondo
+	 * @throws GenericFilterException Eccezione lanciata se si verifica un errore generico nella scelta del filtro
 	 */
 		
 	public ArrayList<Tweet> parseFilter(JSONObject json, String city)
@@ -138,24 +137,10 @@ public class TweetFilter implements Filter<Tweet> {
 		}
 		throw new GenericFilterException("Errore nella scelta del valore del filtro");	
 	}
-	/**
-	 * Metodo per la scelta del filtro geo da applicare al dataset
-	 * 
-	 * @param operator Operatore del filtro
-	 * @param city Citta' da cui si vuole considerare la distanza 
-	 * @param value Valori relativi al filtro
-	 * @return Dataset filtrato relativo al filtro richiesto
-	 * @throws FilterNotFoundException {@link FilterNotFoundException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
-	 * @throws NegativeValueException {@link NegativeValueException}
-	 * @throws IllegalIntervalException {@link IllegalIntervalException}
-	 * @throws GenericFilterException {@link GenericFilterException}
-	 * 
-	 */
 	
 	@Override
 	public ArrayList<Tweet> chooseFilter(String operator, String city, Double... value) 
-			throws FilterNotFoundException, CityNotFoundException, NegativeValueException, IllegalIntervalException, GenericFilterException {
+			throws CityNotFoundException, NegativeValueException, IllegalIntervalException, GenericFilterException {
 		return (ArrayList<Tweet>) utils.select(this.getSample(), operator, city,  value);
 	}
 }

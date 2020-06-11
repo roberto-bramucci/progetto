@@ -2,10 +2,10 @@ package it.univpm.progettoOOP.exceptions;
 
 /**
  * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando viene passata una citta' non presente tra quelle 
- * disponibili per il filtraggio o la richiesta di statistiche
+ * disponibili per il filtro o la richiesta di statistiche
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class CityNotFoundException extends Exception{
 	/**

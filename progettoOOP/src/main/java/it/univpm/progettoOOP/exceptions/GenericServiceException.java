@@ -4,7 +4,7 @@ package it.univpm.progettoOOP.exceptions;
  * metadati da parte del service
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class GenericServiceException extends Exception{
 	/**

@@ -3,7 +3,7 @@ package it.univpm.progettoOOP.exceptions;
  * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando c'e' un errore nella richiesta di un filtro
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class GenericFilterException extends Exception{
 	/**

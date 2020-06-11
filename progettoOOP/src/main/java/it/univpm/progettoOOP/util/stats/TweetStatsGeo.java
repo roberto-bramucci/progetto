@@ -19,8 +19,8 @@ public interface TweetStatsGeo {
 	 * Metodo per l'impostazione delle statistiche relative al campo geo di {@link Tweet}
 	 * @param sample Campione di {@link Tweet} analizzato
 	 * @param city Citta' da cui si vuole calcolare la distanza
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
 	 */
 	public void setStatsGeo(Collection<Tweet> sample, String city) throws EmptyCollectionException, CityNotFoundException;
 	/**

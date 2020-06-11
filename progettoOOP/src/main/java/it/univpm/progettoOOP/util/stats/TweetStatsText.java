@@ -2,7 +2,6 @@ package it.univpm.progettoOOP.util.stats;
 
 import java.util.Collection;
 
-import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.exceptions.EmptyCollectionException;
 import it.univpm.progettoOOP.model.Tweet;
 /**
@@ -17,7 +16,7 @@ public interface TweetStatsText {
 	/**
 	 * Metodo per l'impostazione delle statistiche relative al campo text di {@link Tweet}
 	 * @param sample Campione di {@link Tweet} analizzato
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota}
 	 */
 	public void setStatsText(Collection<Tweet> sample) throws EmptyCollectionException;
 	/**

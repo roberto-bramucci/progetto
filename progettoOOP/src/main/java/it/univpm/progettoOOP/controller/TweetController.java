@@ -50,8 +50,8 @@ public class TweetController {
 	/**
 	 * Rotta per ottenere i metadati relativi al dataset in formato JSON
 	 * 
-	 * @return Metadati relativi a un dato di tipo Tweet
-	 * @throws GenericServiceException Eccezione lanciata nel Service
+	 * @return Metadati relativi a un dato di tipo {@link Tweet}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
 	 */
 	
 	@RequestMapping(value ="/metadata", method = RequestMethod.GET)
@@ -59,10 +59,10 @@ public class TweetController {
 		return new ResponseEntity<>(tweetService.getMetadata(), HttpStatus.OK);
 	}
 	/**
-	 * Rotta per ottenere i dati di tipo Tweet relativi al dataset in formato JSON
+	 * Rotta per ottenere i dati di tipo {@link Tweet} relativi al dataset in formato JSON
 	 * 
 	 * @return Dati di tipo {@link Tweet}
-	 * @throws GenericServiceException {@link GenericServiceException}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
 	 */
 	
 	@RequestMapping(value ="/data", method = RequestMethod.GET)
@@ -71,19 +71,20 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere i dati di tipo Tweet filtrati in base alla distanza 
-	 * da una delle città disponibili (Ancona, Milano, Napoli, Roma)
+	 * Rotta per ottenere i dati di tipo {@link Tweet} filtrati in base alla distanza 
+	 * da una delle citta' disponibili (Ancona, Milano, Napoli, Roma)
 	 * 
 	 * @param city Citta' da cui si vuole considerare la distanza
 	 * @param filter Filtro di distanza da applicare al dataset
 	 * @return Dati di tipo Tweet filtrati in base alla citta' scelta, se presenti
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws FilterNotFoundException {@link FilterNotFoundException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
-	 * @throws NegativeValueException {@link NegativeValueException}
-	 * @throws IllegalIntervalException {@link IllegalIntervalException}
-	 * @throws GenericFilterException {@link GenericFilterException}
-	 * @throws BlankFilterException {@link BlankFilterException}
+	 * 
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati	
+	 * @throws FilterNotFoundException Eccezione lanciata se si inserisce un filtro incompleto o scorretto
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
+	 * @throws NegativeValueException Eccezione lanciata se si inserisce un valore negativo nel filtro di distanza
+	 * @throws IllegalIntervalException Eccezione lanciata se si inserisce nel filtro di distanza un intervallo in cui il primo valore e' maggiore del secondo
+	 * @throws GenericFilterException Eccezione lanciata se si verifica un errore generico nella scelta del filtro
+	 * @throws BlankFilterException Eccezione lanciata se si inserisce un filtro vuoto
 	 */
 	
 	@RequestMapping(value ="/data/{city}", method = RequestMethod.POST)
@@ -106,12 +107,12 @@ public class TweetController {
 		}
 	
 	/**
-	 * Rotta per ottenere un dato di tipo Tweet in base al suo id
+	 * Rotta per ottenere un dato di tipo {@link Tweet} in base al suo id
 	 * 
 	 * @param id id del dato di tipo {@link Tweet} che si vuole ottenere
-	 * @return Tweet corrispondente all'id specificato
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws IllegalIdException {@link IllegalIdException}
+	 * @return {@link Tweet} corrispondente all'id specificato
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws IllegalIdException Eccezione lanciata quando viene inserito un id non disponibile
 	 */
 		
 	@RequestMapping (value = "/data/id/{id}", method = RequestMethod.GET)
@@ -122,13 +123,14 @@ public class TweetController {
 	}
 	
 	/**
-	 * Rotta per ottenere i dati di tipo {@link Tweet} filtrati in base ad una parola contenuta nel testo
+	 * Rotta per ottenere i dati di tipo {@link Tweet} filtrati in base ad una parola 
+	 * di almeno due lettere contenuta nel testo
 	 * 
 	 * @param word Parola contenuta nel testo del {@link Tweet}
 	 * @return {@link Tweet} che contengono la parola specificata, se presenti
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws IllegalWordException {@link IllegalWordException}
-	 * @throws WordNotFoundException {@link WordNotFoundException}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws IllegalWordException Eccezione lanciata se si inserisce una parola troppo corta
+	 * @throws WordNotFoundException Eccezione lanciata se si inserisce una parola non disponibile
 	 */
 	
 	@RequestMapping (value = "/data/text/{word}", method = RequestMethod.GET)
@@ -142,8 +144,8 @@ public class TweetController {
 	 * Rotta per ottenere statistiche relative alla lunghezza del testo di tutti i {@link Tweet} del dataset
 	 *  
 	 * @return Statistiche sulla lunghezza del testo
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota
 	 */
 	
 	@RequestMapping(value = "data/stats/text", method = RequestMethod.GET)
@@ -156,17 +158,15 @@ public class TweetController {
 	
 	/**
 	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo {@link Tweet}
-	 * filtrati in base ad una parola contenuta nel testo
+	 * filtrati in base ad una parola di almeno due lettere contenuta nel testo
 	 * 
 	 * @param word Parola contenuta nel testo del {@link Tweet}
-	 * @return Statistiche sui Tweet che contengono la parola specificata, se presenti
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
-	 * @throws IllegalWordException {@link IllegalWordException}
-	 * @throws WordNotFoundException {@link WordNotFoundException}
+	 * @return Statistiche sui {@link Tweet} che contengono la parola specificata, se presenti
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota
+	 * @throws IllegalWordException Eccezione lanciata se si inserisce una parola troppo corta
+	 * @throws WordNotFoundException Eccezione lanciata se si inserisce una parola non disponibile
 	 */
-
-	
 	
 	@RequestMapping(value = "data/stats/text/{word}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getStatsText(@PathVariable("word") String word) 
@@ -179,8 +179,8 @@ public class TweetController {
 		
 	}
 	/**
-	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo {@link Tweet}
-	 * filtrati in base ad una parola contenuta nel testo e alla distanza da una delle citta' disponibili
+	 * Rotta per ottenere statistiche relative alla lunghezza del testo dei dati di tipo {@link Tweet},
+	 * filtrati in base ad una parola di almeno due lettere contenuta nel testo e alla distanza da una delle citta' disponibili
 	 *
 	 * @param word Parola contenuta nel testo del {@link Tweet}
 	 * @param city Citta' da cui si vuole considerare la distanza
@@ -188,16 +188,16 @@ public class TweetController {
 	 * @return Statistiche sul testo dei Tweet che contengono la parola specificata e 
 	 * filtrati in base alla citta' scelta
 	 * 
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws FilterNotFoundException {@link FilterNotFoundException}
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
-	 * @throws NegativeValueException {@link NegativeValueException}
-	 * @throws IllegalIntervalException {@link IllegalIntervalException}
-	 * @throws GenericFilterException {@link GenericFilterException}
-	 * @throws IllegalWordException  {@link IllegalWordException}
-	 * @throws WordNotFoundException {@link WordNotFoundException}
-	 * @throws BlankFilterException {@link BlankFilterException}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws FilterNotFoundException Eccezione lanciata se si inserisce un filtro incompleto o scorretto
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
+	 * @throws NegativeValueException Eccezione lanciata se si inserisce un valore negativo nel filtro di distanza
+	 * @throws IllegalIntervalException Eccezione lanciata se si inserisce nel filtro di distanza un intervallo in cui il primo valore e' maggiore del secondo
+	 * @throws GenericFilterException Eccezione lanciata se si verifica un errore generico nella scelta del filtro
+	 * @throws IllegalWordException Eccezione lanciata se si inserisce una parola troppo corta
+	 * @throws WordNotFoundException Eccezione lanciata se si inserisce una parola non disponibile
+	 * @throws BlankFilterException Eccezione lanciata se si inserisce un filtro vuoto
 	 */
 	
 	
@@ -230,18 +230,19 @@ public class TweetController {
 	 * Rotta per ottenere statistiche relative alla distanza dei dati di tipo {@link Tweet} dalla citta' 
 	 * specificata, con la possibilita' di inserire filtri di distanza 
 	 * 
-	 * @param city Città da cui si vuole considerare la distanza
+	 * @param city Citta' da cui si vuole considerare la distanza
 	 * @param filter Filtro di distanza ad applicare al dataset (facoltativo)
 	 * @return Statistiche sulla distanza dei {@link Tweet}, eventualmente
-	 * filtrati in base alla città scelta
+	 * filtrati in base alla citta' scelta
 	 * 
-	 * @throws GenericServiceException {@link GenericServiceException}
-	 * @throws FilterNotFoundException {@link FilterNotFoundException}
-	 * @throws EmptyCollectionException {@link EmptyCollectionException}
-	 * @throws CityNotFoundException {@link CityNotFoundException}
-	 * @throws NegativeValueException {@link NegativeValueException}
-	 * @throws IllegalIntervalException {@link IllegalIntervalException}
-	 * @throws GenericFilterException {@link GenericFilterException}
+	 * @throws GenericServiceException Eccezione lanciata se si verifica un errore nella deserializzazione dei dati caricati
+	 * @throws FilterNotFoundException Eccezione lanciata se si inserisce un filtro incompleto o scorretto
+	 * @throws EmptyCollectionException Eccezione lanciata quando viene analizzata una Collection vuota
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
+	 * @throws NegativeValueException Eccezione lanciata se si inserisce un valore negativo nel filtro di distanza
+	 * @throws IllegalIntervalException Eccezione lanciata se si inserisce nel filtro di distanza un intervallo in cui il primo valore e' maggiore del secondo
+	 * @throws GenericFilterException Eccezione lanciata se si verifica un errore generico nella scelta del filtro
+	 * @throws BlankFilterException Eccezione lanciata se si inserisce un filtro vuoto
 	 */
 	
 	
@@ -250,7 +251,7 @@ public class TweetController {
 	public ResponseEntity<Object> getStatsGeoWithFilter(@PathVariable ("city") String city, 
 			@RequestBody (required = false) String filter) 
 					throws GenericServiceException, FilterNotFoundException, EmptyCollectionException, CityNotFoundException, NegativeValueException,
-					IllegalIntervalException, GenericFilterException{
+					IllegalIntervalException, GenericFilterException, BlankFilterException{
 		if (filter == null) {
 			TweetStatsGeo tweetStatsGeo = new TweetStatsGeoImpl();
 			tweetStatsGeo.setStatsGeo(tweetService.getData(), city);
@@ -266,8 +267,11 @@ public class TweetController {
 				tweetStatsGeo.setStatsGeo(filteredArray, city);
 				return new ResponseEntity<>(tweetStatsGeo.getStatsGeo(), HttpStatus.OK);
 			}
+			catch(NoSuchElementException e) {
+				throw new BlankFilterException("Nessun filtro inserito");
+			}
 			catch(JSONException e) {
-				throw new FilterNotFoundException("Il filtro inserito è incompleto");
+				throw new FilterNotFoundException("Il filtro inserito è incompleto o scorretto");
 			}
 		}
 	}

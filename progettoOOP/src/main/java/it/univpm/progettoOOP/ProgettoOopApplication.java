@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Roberto Bramucci
  * @author Stefano Bonci
  *
+ * @version 1.0
  */
 @SpringBootApplication
 public class ProgettoOopApplication {

@@ -21,7 +21,7 @@ public interface FilterIdText {
 	 * @param sample Dataset da considerare
 	 * @param id id del {@link Tweet}
 	 * @return {@link Tweet} relativo all'id inserito
-	 * @throws IllegalIdException {@link IllegalIdException}
+	 * @throws IllegalIdException Eccezione lanciata quando viene inserito un id non disponibile
 	 */
 	public Tweet getTweetFromId(Collection<Tweet> sample, String id) throws IllegalIdException;
 	
@@ -31,8 +31,8 @@ public interface FilterIdText {
 	 * @param sample Dataset da considerare
 	 * @param word Parola del testo di {@link Tweet}
 	 * @return Dataset filtrato in base alla parola inserita
-	 * @throws IllegalWordException {@link IllegalIdException}
-	 * @throws WordNotFoundException {@link WordNotFoundException}
+	 * @throws IllegalWordException Eccezione lanciata se si inserisce una parola troppo corta
+	 * @throws WordNotFoundException Eccezione lanciata se si inserisce una parola non disponibile
 	 */
 	public Collection<Tweet> getTweetsFromText(Collection<Tweet> sample, String word) 
 			throws IllegalWordException, WordNotFoundException;

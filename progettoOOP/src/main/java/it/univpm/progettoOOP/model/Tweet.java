@@ -108,8 +108,8 @@ public class Tweet {
 	 * Metodo che determina la citta' da considerare per filtri e statistiche
 	 * 
 	 * @param city Citta' da cui si vuole considerare la distanza 
-	 * @return La distanza del {@link Tweet} dalla città specificata
-	 * @throws CityNotFoundException {@link CityNotFoundException}
+	 * @return La distanza del {@link Tweet} dalla citta' specificata
+	 * @throws CityNotFoundException Eccezione lanciata se si inserisce una citta' non disponibile
 	 */
 	
 	public double chooseCity(String city) throws CityNotFoundException{
@@ -127,7 +127,7 @@ public class Tweet {
 	/**
 	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Ancona
 	 * 
-	 * @return Distanza in chilometri del Tweet da Ancona
+	 * @return Distanza in chilometri del {@link Tweet} da Ancona
 	 */
 	
 	public double getDistanceAncona() {
@@ -140,7 +140,7 @@ public class Tweet {
 	/**
 	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Roma
 	 * 
-	 * @return Distanza in chilometri del Tweet da Roma
+	 * @return Distanza in chilometri del {@link Tweet} da Roma
 	 */
 	
 	public double getDistanceRoma() {
@@ -152,7 +152,7 @@ public class Tweet {
 	/**
 	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Milano
 	 * 
-	 * @return Distanza in chilometri del Tweet da Milano
+	 * @return Distanza in chilometri del {@link Tweet} da Milano
 	 */
     
 	public double getDistanceMilano() {
@@ -164,7 +164,7 @@ public class Tweet {
 	/**
 	 * Metodo per ottenere la distanza in chilometri del {@link Tweet} da Napoli
 	 * 
-	 * @return Distanza in chilometri del Tweet da Napoli
+	 * @return Distanza in chilometri del {@link Tweet} da Napoli
 	 */
 	
 	public double getDistanceNapoli() {

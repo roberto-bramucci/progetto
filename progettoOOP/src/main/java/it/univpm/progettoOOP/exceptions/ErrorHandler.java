@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 /**
- * Classe per la gestione delle eccezioni personalizzate e i relativi oggetti Error
+ * Classe per la gestione delle eccezioni personalizzate e i relativi oggetti {@link Error}
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 @ControllerAdvice
 public class ErrorHandler {

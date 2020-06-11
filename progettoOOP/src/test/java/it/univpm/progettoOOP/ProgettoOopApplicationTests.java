@@ -2,26 +2,17 @@ package it.univpm.progettoOOP;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.web.client.RestTemplate;
 
-import it.univpm.progettoOOP.exceptions.CityNotFoundException;
 import it.univpm.progettoOOP.model.Tweet;
-import it.univpm.progettoOOP.util.stats.TweetStatsGeo;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeoImpl;
 import it.univpm.progettoOOP.util.stats.TweetStatsTextImpl;
 

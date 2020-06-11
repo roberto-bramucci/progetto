@@ -3,7 +3,7 @@ package it.univpm.progettoOOP.exceptions;
  * Classe che rappresenta un'eccezione personalizzata che viene lanciata quando il filtro richiesto non esiste
  * @author Roberto Bramucci
  * @author Stefano Bonci
- *
+ * @version 1.0
  */
 public class FilterNotFoundException extends Exception{
 	/**
