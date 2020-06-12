@@ -205,3 +205,28 @@ Qui sotto viene riportato un esempio di statistiche sul testo relative effettuat
 
 		"numTweetAnalyzed": 32
 	}
+	
+## Diagrammi UML
+Qui sotto vengono riportati solo alcuni dei diagrammi UML realizzati, ma essi sono tutti disponibili in questa repository.
+**Diagramma dei package**
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/package.jpg)
+**Diagrammi delle classi**
+
+Controller
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/controller.jpg)
+Model e util.filter
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/model_util.filter.jpg)
+util.stats
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/util.stats.jpg)
+**Diagrammi delle sequenze**
+getMeta
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/getMeta.jpg)
+getData
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/getData.jpg)
+getDataWithFilter
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/getDataWithFilter.jpg)
+getStatsTextWithFilter
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/getStatsTextWithFilter.jpg)
+
+
+
