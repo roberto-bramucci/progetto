@@ -43,47 +43,52 @@ vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
 Tutti i dati vengono forniti tramite postman, attraverso il quale è possibile effettuare le varie chiamate GET e POST, in formato JSON.  Riportiamo come esempio come appare la restituzione di un tweet e di una statistica in seguito ad una chiamata.
 **Tweet**
 
-    "id": "1264994235180253190",
+        {
+	    "id": "1264994235180253190",
 
-	"text": "TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the 
+		"text": "TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the 
 		acrobatic Italian Air Force Squad) flew over Turin 
 		today.\n\nThey started from #Codogno (the town which 
 		the symbol of the fight against #covid_19) and will 
 		fly over many… https://t.co/i99LXh2k8K",
 
-	"geo": {
+		"geo": {
 
-		"x": 7.6777,
+			"x": 7.6777,
 
-		"y": 45.0702
+			"y": 45.0702
 
-	},
+		},
 
-	"distanceRoma": 525.2659832732877,
+		"distanceRoma": 525.2659832732877,
 
-	"distanceAncona": 491.6370694241606,
+		"distanceAncona": 491.6370694241606,
 
-	"distanceMilano": 126.22409086728408,
+		"distanceMilano": 126.22409086728408,
 
-	"distanceNapoli": 712.2732630019941
+		"distanceNapoli": 712.2732630019941
+	}
+
 
 **Statistica**
+	   
+	   {
+		    "field": "geo",
 
-	    "field": "geo",
+			"avgDist": 240.04996892770572,
 
-		"avgDist": 240.04996892770572,
+			"maxDist": 674.2102661095064,
 
-		"maxDist": 674.2102661095064,
+			"minDist": 0.01162228454654779,
 
-		"minDist": 0.01162228454654779,
+			"sumDist": 7681.599005686583,
 
-		"sumDist": 7681.599005686583,
+			"varDist": 36946.66245788262,
 
-		"varDist": 36946.66245788262,
+			"devStdDist": 192.2151462759442,
 
-		"devStdDist": 192.2151462759442,
-
-		"numTweetAnalyzed": 32
+			"numTweetAnalyzed": 32
+		}
 
 ## Quali chiamate si possono fare?
 La Tabella mostra le possibili rotte dell'applicazione:
@@ -107,7 +112,14 @@ I filtri possono essere di due tipi:
 
  **Filtro sulle parole**
  Questo filtro permette di ottenere i risultati solo per i tweet che contengono una determinata parola. In questo caso è sufficiente specificare la parola che vogliamo utilizzare come filtro e inserirla come path variable nelle rotte in cui è possibile eseguire tale azione.
- Se ad esempio vogliamo utilizzare la rotta /data/text/{word} per ottenere i dati relativi ai tweet che contengono la parola "Tricolore" dovremo la rotta diventerà /data/text/Tricolore e inserire la parola Tricolore 
+ Se ad esempio vogliamo utilizzare la rotta 
+ 
+`/data/text/{word} ` 
+ 
+ per ottenere i dati relativi ai tweet che contengono la parola "Tricolore" tale rotta diventerà  :
+ 
+ `/data/text/Tricolore`
+ 
 **Filtro sulla distanza**
 Questo filtro serve ad ottenere i risultati solo per i tweet che rispettano i parametri relativi alla distanza da alcune città italiane. 
 Questo filtro può essere utilizzato solo nelle rotte che utilizzano il metodo POST attraverso una stringa in formato JSON da inserire nel body della richiesta.
