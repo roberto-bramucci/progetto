@@ -5,6 +5,18 @@ L'applicazione presente in questa repository permette di ottenere dati, metadati
 ## Cosa si può fare?
 il seguente diagramma dei casi d'uso permette di visualizzare ciò che l'utente può fare tramite l'applicazione:
 ![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/UseCase.jpg)
+## Come è fatto un tweet?
+Ogni tweet che viene restituito tramite una chiamata mostrerà le informazioni descritte in tabella
+
+|campo|significato|
+|-|-|
+|id|stringa numerica che identifica ogni tweet |
+|text|testo presente all'interno del tweet|
+|geo|coordinate geografiche relative al tweet|
+|distanceRoma|distanza da Roma rispetto alla geolocalizzazione del tweet|
+|distanceAncona|distanza da Ancona rispetto alla geolocalizzazione del tweet|
+|distanceMilano|distanza da Milano rispetto alla geolocalizzazione del tweet|
+|distanceNapoli|distanza da Napoli rispetto alla geolocalizzazione del tweet|
 ## Gli id dei tweet
 vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
 1264994235180253190,
@@ -41,10 +53,11 @@ vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
 1264781761466249216
 ## Come vengono restituiti i dati
 Tutti i dati vengono forniti tramite postman, attraverso il quale è possibile effettuare le varie chiamate GET e POST, in formato JSON.  Riportiamo come esempio come appare la restituzione di un tweet e di una statistica in seguito ad una chiamata.
+
 **Tweet**
 
         {
-	    "id": "1264994235180253190",
+	        "id": "1264994235180253190",
 
 		"text": "TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the 
 		acrobatic Italian Air Force Squad) flew over Turin 
@@ -150,6 +163,16 @@ MI (Milano)
 RM (Roma)
 NP (Napoli)
 Ogni qualvolta venga inserita una città diversa da queste l'applicazione lancerà un'eccezione.
+
+Se ad esempio vogliamo usare la rotta POST 
+
+    /data/{city}
+
+per ottenere i dati filtrati rispetto alla città di Ancona tale rotta diventerà:
+
+    /data/AN
+
+inoltre nel body si dovrà inserire un filtro valido 
 
 ## Statistiche
 
