@@ -1,4 +1,4 @@
-# Progetto bramucci-bonci
+# Progetto OOP Bramucci-Bonci
 ## Introduzione
 L'applicazione presente in questa repository permette di ottenere dati, metadati e statistiche relativamente a tweet contenenti geolocalizzazione precedentemente selezionati, eventualmente filtrati.. É infatti possibile eseguire filtraggi legati alla distanza rispetto ad Ancona (e altre città italiane),  al testo presente nei tweet e all'id dei tweet.
 ## Cosa si può fare?
