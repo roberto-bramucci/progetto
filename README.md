@@ -1,9 +1,8 @@
-# progetto-Bramucci-Bonci
 # Progetto bramucci-bonci
 ## Introduzione
 L'applicazione presente in questa repository permette di ottenere dati, metadati e statistiche relativamente a tweet contenenti geolocalizzazione precedentemente selezionati, eventualmente filtrati.. É infatti possibile eseguire filtraggi legati alla distanza rispetto ad Ancona (e altre città italiane),  al testo presente nei tweet e all'id dei tweet.
 ## Cosa si può fare?
-il seguente diagramma dei casi d'uso permette di visualizzare ciò che l'utente può fare tramite l'applicazione:
+Il seguente diagramma dei casi d'uso permette di visualizzare ciò che l'utente può fare tramite l'applicazione:
 ![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/UseCase.jpg)
 ## Come è fatto un tweet?
 Ogni tweet che viene restituito tramite una chiamata mostrerà le informazioni descritte in tabella
@@ -18,7 +17,7 @@ Ogni tweet che viene restituito tramite una chiamata mostrerà le informazioni d
 |distanceMilano|distanza da Milano rispetto alla geolocalizzazione del tweet|
 |distanceNapoli|distanza da Napoli rispetto alla geolocalizzazione del tweet|
 ## Gli id dei tweet
-vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
+Vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
 1264994235180253190,
 1265011663150989314,
 1269715922270531586,
@@ -101,7 +100,7 @@ Tutti i dati vengono forniti tramite postman, attraverso il quale è possibile e
 			"devStdDist": 192.2151462759442,
 
 			"numTweetAnalyzed": 32
-		}
+	}
 
 ## Quali chiamate si possono fare?
 La Tabella mostra le possibili rotte dell'applicazione:
