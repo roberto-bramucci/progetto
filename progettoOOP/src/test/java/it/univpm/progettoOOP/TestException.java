@@ -25,6 +25,7 @@ import it.univpm.progettoOOP.util.filter.FilterUtils;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeo;
 import it.univpm.progettoOOP.util.stats.TweetStatsGeoImpl;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,15 +35,17 @@ import org.junit.jupiter.api.Test;
 */
 
 class TestException {
-	/**
-	 * Oggetto di {@link FilterIdTextImpl} utilizzato nei test
-	 */
-	private FilterIdTextImpl fiti = new FilterIdTextImpl();
+	@BeforeEach
+	void setUp() throws Exception {		
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
 		
-		
 	/**
-	* Test verifica se viene lanciata l'eccezione {@link CityNotFoundException} quando viene passata
-	* una città diversa da quelle disponibili per eseguire filtraggi o ottenere statistiche
+	* Test verifica se viene lanciata l'eccezione CityNotFoundException quando viene passata
+	* una città diversa da quelle disponibili per eseguire filtri o ottenere statistiche
 	*/
 	@Test
 	public void cityNotFoundExceptionSucceeds() {
@@ -59,24 +62,24 @@ class TestException {
 	}
 		
 	/**	
-	 * Test che verifica se viene lanciata l'eccezione {@link IllegalIdException} se viene passato un id non presente tra quelli disponibili
+	 * Test che verifica se viene lanciata l'eccezione IllegalIdException se viene passato un id non presente tra quelli disponibili
 	 * al metodo getTweetFromId 
 	 */
 	@Test
 	public void illegalIdExceptionSucceeds() {
-		Exception exception = assertThrows(IllegalIdException.class, () -> { Collection<Tweet> sample = new ArrayList<Tweet>();
-		fiti.getTweetFromId(sample, "126499423518025319");});
+		Exception exception = assertThrows(IllegalIdException.class, () -> { 
+			Collection<Tweet> sample = new ArrayList<Tweet>();
+			FilterIdTextImpl fiti = new FilterIdTextImpl();
+			fiti.getTweetFromId(sample, "126499423518025319");});
 		
 		String expectedMessage = "Questo id non esiste";	
 		String actualMessage = exception.getMessage();
 		 
 		assertTrue(actualMessage.contains(expectedMessage));
 	}
-		
-		
-		
+			
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link IllegalIntervalException} se vengono passati valori errati nel filtraggio "$bt"
+	 * Test che verifica se viene lanciata l'eccezione IllegalIntervalException se vengono passati valori errati al filtro "$bt"
 	 */
 		
 	@Test
@@ -92,8 +95,8 @@ class TestException {
 	}
 		
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link NegativeValueException} se viene passato un valore negativo per 
-	 * la distanza nella quale eseguire il filtraggio
+	 * Test che verifica se viene lanciata l'eccezione NegativeValueException se viene passato un valore negativo per 
+	 * la distanza nella quale eseguire il filtro
 	 */
 		
 	@Test
@@ -110,7 +113,7 @@ class TestException {
 	}
 		
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link GenericFilterException} se vengono passati valori errati per eseguire un filtraggio
+	 * Test che verifica se viene lanciata l'eccezione GenericFilterException se vengono passati valori errati per eseguire un filtro
 	 */
 	@Test
 	public void genericFilterExceptionSucceeds() {
@@ -125,13 +128,14 @@ class TestException {
 	}
 		
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link IllegalWordException} quando viene passata una parola troppo corta
+	 * Test che verifica se viene lanciata l'eccezione IllegalWordException quando viene passata una parola troppo corta
 	 *  al metodo getTweetFromText
 	 */
 	@Test
 	public void illegalWordExceptionSucceeds() {
 		Exception exception = assertThrows(IllegalWordException.class, () -> { 
 			Collection<Tweet> sample = new ArrayList<Tweet>();
+			FilterIdTextImpl fiti = new FilterIdTextImpl();
 			fiti.getTweetsFromText(sample, "a");});
 		String expectedMessage = "Inserire una parola più lunga";
 		String actualMessage = exception.getMessage();
@@ -139,7 +143,7 @@ class TestException {
 		assertTrue(actualMessage.contains(expectedMessage));
 	}
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link EmptyCollectionException} quando viene passata una Collection vuota
+	 * Test che verifica se viene lanciata l'eccezione EmptyCollectionException quando viene passata una Collection vuota
 	 *  per calcolare le statistiche
 	 */
 	@Test
@@ -156,7 +160,7 @@ class TestException {
 	}
 	
 	/**
-	 * Test che verifica se viene lanciata l'eccezione {@link FilterNotFoundException} quando viene inserito un filtro
+	 * Test che verifica se viene lanciata l'eccezione FilterNotFoundException quando viene inserito un filtro
 	 * non esistente
 	 */
 	

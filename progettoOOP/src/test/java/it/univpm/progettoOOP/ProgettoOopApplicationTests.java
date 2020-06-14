@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +25,15 @@ import it.univpm.progettoOOP.util.stats.TweetStatsTextImpl;
  *
  */
 class ProgettoOopApplicationTests {
+	
+	@BeforeEach
+	void setUp() throws Exception {		
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+	
 	/**
 	 * Test che verifica se la chiamata del controller getMeta avviene con successo
 	 * @throws URISyntaxException
