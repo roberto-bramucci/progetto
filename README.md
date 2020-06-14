@@ -1,6 +1,6 @@
 # Progetto OOP Bramucci-Bonci
 ## Introduzione
-L'applicazione presente in questa repository permette di ottenere dati, metadati e statistiche relativamente a tweet contenenti geolocalizzazione precedentemente selezionati, eventualmente filtrati.. É infatti possibile eseguire filtraggi legati alla distanza rispetto ad Ancona (e altre città italiane),  al testo presente nei tweet e all'id dei tweet.
+L'applicazione presente in questa repository permette di ottenere dati, metadati e statistiche relativamente a tweet contenenti geolocalizzazione precedentemente selezionati tramite l'uso delle API di Twitter, eventualmente filtrati. É infatti possibile eseguire filtraggi legati alla distanza rispetto ad Ancona (e altre città italiane), al testo presente nei tweet e all'id dei tweet.
 ## Cosa si può fare?
 Il seguente diagramma dei casi d'uso permette di visualizzare ciò che l'utente può fare tramite l'applicazione:
 ![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/UseCase.jpg)
@@ -51,11 +51,11 @@ Vengono qui sotto riportati gli id dei tweet che abbiamo selezionato:
 1264850093624233984,
 1264781761466249216
 ## Come vengono restituiti i dati
-Tutti i dati vengono forniti tramite postman, attraverso il quale è possibile effettuare le varie chiamate GET e POST, in formato JSON.  Riportiamo come esempio come appare la restituzione di un tweet e di una statistica in seguito ad una chiamata.
+Tutti i dati vengono forniti tramite Postman, attraverso il quale è possibile effettuare le varie chiamate GET e POST, con risposta in formato JSON.  Riportiamo come esempio come appare la restituzione di un tweet e di una statistica in seguito ad una chiamata.
 
 **Tweet**
 
-        {
+ 	{
 	        "id": "1264994235180253190",
 
 		"text": "TRICOLOR!!!\n\nThe Italian Frecce Tricolore (the 
@@ -84,7 +84,7 @@ Tutti i dati vengono forniti tramite postman, attraverso il quale è possibile e
 
 **Statistica**
 	   
-	   {
+	{
 		    "field": "geo",
 
 			"avgDist": 240.04996892770572,
@@ -136,7 +136,7 @@ I filtri possono essere di due tipi:
 Questo filtro serve ad ottenere i risultati solo per i tweet che rispettano i parametri relativi alla distanza da alcune città italiane. 
 Questo filtro può essere utilizzato solo nelle rotte che utilizzano il metodo POST attraverso una stringa in formato JSON da inserire nel body della richiesta.
 
-Gli operatori che permettono di eseguire il filtraggio sono riportat in questa tabella
+Gli operatori che permettono di eseguire il filtraggio sono riportati in questa tabella
 |operatore|parametro| a cosa serve |
 |--|--|--|
 | "$gt" |un valore numerico di tipo Double| restituisce solo i dati o le statistiche relative ai tweet che si trovano a una distanza maggiore di quella indicata nel filtro |
@@ -171,7 +171,7 @@ per ottenere i dati filtrati rispetto alla città di Ancona tale rotta diventer�
 
     /data/AN
 
-inoltre nel body si dovrà inserire un filtro valido 
+inoltre nel body si dovrà inserire un filtro valido. 
 
 ## Statistiche
 
