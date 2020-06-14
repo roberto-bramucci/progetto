@@ -81,7 +81,6 @@ class TestException {
 	/**
 	 * Test che verifica se viene lanciata l'eccezione IllegalIntervalException se vengono passati valori errati al filtro "$bt"
 	 */
-		
 	@Test
 	public void illegalIntervalExceptionSucceeds() {
 		Exception exception = assertThrows(IllegalIntervalException.class, () -> { 
