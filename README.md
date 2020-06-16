@@ -242,16 +242,21 @@ Qui sotto viene riportato un esempio di statistiche sul testo relative effettuat
 	
 ## Diagrammi UML
 Qui sotto vengono riportati solo alcuni dei diagrammi UML realizzati, ma essi sono tutti disponibili in questa repository.
+
 **Diagramma dei package**
 ![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/package.jpg)
+
 **Diagrammi delle classi**
 
 Controller
-![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/controller.jpg)
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/controller.png)
+
 Model e util.filter
-![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/model_util.filter.jpg)
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/model_util.filter.png)
+
 util.stats
-![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/util.stats.jpg)
+![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/util.stats.png)
+
 **Diagrammi delle sequenze**
 getMeta
 ![](https://github.com/roberto-bramucci/progetto-Bramucci-Bonci/blob/master/getMeta.jpg)
