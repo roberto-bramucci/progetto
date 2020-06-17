@@ -292,7 +292,7 @@ Qui sotto vengono riportati solo alcuni dei diagrammi UML realizzati, ma essi so
 
 ## Autori
 
- - Roberto Bramucci (Service, gestione rotte, filtri, statistiche, gestione eccezioni, documentazione)
- - Stefano Bonci (diagrammi UML, filtri, gestione eccezioni, JUnit test, ReadMe.md, documentazione)
+ - **Roberto Bramucci** (Service, gestione rotte, filtri, statistiche, gestione eccezioni, documentazione)
+ - **Stefano Bonci** (diagrammi UML, filtri, gestione eccezioni, JUnit test, ReadMe.md, documentazione)
 
 
